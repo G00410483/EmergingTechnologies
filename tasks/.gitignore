@@ -1,0 +1,37 @@
+# Ignore node_modules for Node.js projects
+node_modules/
+
+# Ignore compiled files
+*.o
+*.obj
+*.so
+*.exe
+*.dll
+
+# Ignore logs
+logs/
+*.log
+
+# Ignore operating system files
+.DS_Store
+Thumbs.db
+
+# Ignore environment files
+.env
+.env.local
+
+# Ignore temporary files
+*.tmp
+*.swp
+
+# Ignore build output directories
+/dist/
+/build/
+
+/coverage/
+/public/
+
+# Ignore Python virtual environments
+venv/
+__pycache__/
+*.pyc
