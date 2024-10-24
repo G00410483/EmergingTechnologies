@@ -5,9 +5,6 @@ This project implements a third-order letter approximation model using five plai
 The purpose of this model is to count the occurances of every three-character sequence in the cleaned text of these books.
 The model can provide insights into frequency of specific letter sequences. 
 
-#### Text Files:
-   - The script uses five free English works from Project Gutenberg in Plain Text UTF-8 format.
-
 ### Project Gutenberg Works
 - Five English works from Project Gutenberg are selected, ensuring that they:
   - Are in Plan Text UTF-8 format.
