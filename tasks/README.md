@@ -1,7 +1,5 @@
 TASK 1: Third-Order Letter Approximation Model
 
-TASK 1: Third-Order Letter
-
 Overview
 This project implements a third-order letter approximation model using five plain-text works from Project Gutenberg. 
 The purpose of this model is to count the occurances of every three-character sequence in the cleaned text of these books.
