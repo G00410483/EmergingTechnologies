@@ -17,7 +17,7 @@ Project Gutenberg Works
 - Five English works from Project Gutenberg are selected, ensuring that they:
   - Are in Plan Text UTF-8 format.
   - Do not contain any special characters outside the ASCII range (only letters, spaces, and full stops are allowed).
-- Files are named: file1, file2, file3, file4, file5 for easier usage.
+- Files named: file1, file2, file3, file4, file5 for easier usage.
 
 Function Descriptions:
 1. load_and_clean_text(file_paths)
