@@ -1,4 +1,5 @@
 TASK 1: Third-Order Letter Approximation Model
+TASK 1
 
 Overview
 This project implements a third-order letter approximation model using five plain-text works from Project Gutenberg. 
