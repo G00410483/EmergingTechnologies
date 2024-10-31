@@ -9,3 +9,13 @@ const elizaResponses = [
     { pattern: /.*/, response: "Tell me more." }
 ];
 
+// Function to get the Eliza response
+// Takes an input string and returns a response
+function getElizaResponse(input) {
+    for (let rule of elizaResponses) {
+        let match = input.match(rule.pattern);
+        if (match) {
+            return rule.response.replace("$1", match[1]);
+        }
+    }
+}
