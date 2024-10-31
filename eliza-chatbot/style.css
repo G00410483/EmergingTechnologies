@@ -54,3 +54,21 @@ body {
     border-radius: 5px;
     line-height: 1.4;
 }
+
+#chat-box p strong {
+    display: inline-block;
+    width: 50px;
+    color: #007bff;
+}
+
+/* User messages */
+#chat-box p:nth-child(odd) {
+    background-color: #d9edf7;
+    align-self: flex-start;
+}
+
+/* ELIZA's messages */
+#chat-box p:nth-child(even) {
+    background-color: #e2e3e5;
+    align-self: flex-start;
+}
