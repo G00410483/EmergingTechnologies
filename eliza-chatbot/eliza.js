@@ -47,3 +47,12 @@ function processInput(input) {
     // Clear input field
     inputField.value = '';
 }
+
+// Reset the chat history
+// Clears all messages from the chat box
+function resetChat() {
+    // Get the chat box
+    const chatBox = document.getElementById("chat-box");
+    // Clear the chat box
+    chatBox.innerHTML = ''; // Clear all messages
+}
