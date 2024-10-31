@@ -12,9 +12,12 @@ const elizaResponses = [
 // Function to get the Eliza response
 // Takes an input string and returns a response
 function getElizaResponse(input) {
+    // Loop through the rules and find a match
     for (let rule of elizaResponses) {
+        // Check if the input matches the pattern
         let match = input.match(rule.pattern);
         if (match) {
+            // Return the response with the match
             return rule.response.replace("$1", match[1]);
         }
     }
