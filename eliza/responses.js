@@ -1,6 +1,6 @@
 // Description: This file contains the responses that Eliza can give to the user based on the patterns that are matched.
 // The responses are stored as an array of objects, where each object contains a pattern and a response.
-const responses = [
+const elizaResponses = [
     { pattern: /hello|hi|hey/i, response: "Hello! How can I help you today?" },
     { pattern: /my name is (.*)/i, response: "Nice to meet you, $1. How can I assist you?" },
     { pattern: /I need (.*)/i, response: "Why do you need $1?" },
@@ -30,4 +30,4 @@ const responses = [
 ];
 
 // Export the responses for use in other files
-export default responses;
+export default elizaResponses;

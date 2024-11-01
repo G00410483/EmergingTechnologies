@@ -1,4 +1,5 @@
 /* Filename: eliza.js */
+import elizaResponses from "./responses.js";
 
 // Function to get the Eliza response
 // Takes an input string and returns a response
