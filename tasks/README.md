@@ -55,7 +55,7 @@ This task extends trigram model from Task 1 by generating string based on the fr
 ### Overview
 The purpose of this task is to assess the quality of the generated text by calculating the percentage of valid English words within it, giving insight into model's ability to produce coherent language sequences. In Task 3, the generated text from the trigram-based third order approximation model is analzyed to determine the percentage of valid English words. 
 
-### Function DEscriptions:
+### Function Descriptions:
 #### 1. load_word_list(file_path)
   - This function loads a list of valid English words from the file specified by file_path. The words are converted to uppercase to match the case of generated text.
   - Parameters: file_path (str): Path to words.txt, the file containg valid English words.
