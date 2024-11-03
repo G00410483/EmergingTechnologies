@@ -42,9 +42,32 @@ This task extends trigram model from Task 1 by generating string based on the fr
      - trigram_counts (dict): The dictionary of trigrams and their frequencies, generated in Task 1.
      - prev_two_chars (str): A two-character string that represents the previous two characters in the current sequence.
    - Returns: The predicted next character based on the trigram model.
+     
 #### 2. generate_text(trigram_counts, length=10000)
    - This function generates a long string of text by repeatedly predicting the next character based on the previous two characters, starting with 'TH'.
    - Parameters:
      - trigram_counts (dict): The trigram frequency dictionary from Task 1.
      - length (int, optional): The desired length of the generated text (default is 10,000 characters).
    - Returns: A generated string of the specified length.
+
+## TASK 3: Analyze Your Model
+
+### Overview
+The purpose of this task is to assess the quality of the generated text by calculating the percentage of valid English words within it, giving insight into model's ability to produce coherent language sequences. In Task 3, the generated text from the trigram-based third order approximation model is analzyed to determine the percentage of valid English words. 
+
+### Function DEscriptions:
+#### 1. load_word_list(file_path)
+  - This function loads a list of valid English words from the file specified by file_path. The words are converted to uppercase to match the case of generated text.
+  - Parameters: file_path (str): Path to words.txt, the file containg valid English words.
+  - Returns: A set of words, all in uppercase.
+    
+#### 2. calculate_percentage_of_real_words(generated_text, valid_words)
+  - This function calculates the percentage of valid English words within the generated text by checking each word against the loaded list of valid words.
+  - Parameters:
+      - generated_text (str): The generated text by trigram model.
+      - valid_words (set): A set of valid English words loaded from words.txt.
+  - Returns: A float representing the percetage of valid ENglish words in the generated text. 
+
+
+
+
