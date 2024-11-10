@@ -32,12 +32,15 @@ function getElizaResponse(input) {
 // Function to process user input
 // Takes the input from the user and displays it in the chat box
 function processInput(input) {
+    event.preventDefault(); // Prevent form submission
     // Get the input field and chat box
     const inputField = document.getElementById("user-input");
     // Get the chat box
     const chatBox = document.getElementById("chat-box");
     // Get the user's message
     const userMessage = inputField.value;
+
+    if (userMessage.trim() === '') return; // If the input is empty, do nothing
     
     // Display user's message
     chatBox.innerHTML += `<p><strong>You:</strong> ${userMessage}</p>`;
