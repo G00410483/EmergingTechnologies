@@ -183,9 +183,19 @@ function addMessage(content, sender) {
     const message = document.createElement('div');
     // Add the appropriate classes
     message.classList.add('message', sender); // 'sender' should be 'user' or 'bot'
+    // Set the text content
     message.innerHTML = content;
 
-   
+    // Add timestamp
+    const time = new Date();
+    // Format the time as HH:MM
+    const timestamp = document.createElement('span');
+    // Add the 'timestamp' class
+    timestamp.classList.add('timestamp');
+    // Set the text content to the formatted time
+    timestamp.textContent = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    // Append the timestamp to the message
+    message.appendChild(timestamp);
 
     chatBox.appendChild(message);
     chatBox.scrollTop = chatBox.scrollHeight;
