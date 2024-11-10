@@ -12,6 +12,8 @@ function getElizaResponse(input) {
         // Check if the input matches the pattern
         let match = input.match(rule.pattern);
         if (match) {
+            // Handle cases where there might not be a capture group
+            let response = rule.response;
             // Return the response with the match
             return rule.response.replace("$1", match[1]);
         }
