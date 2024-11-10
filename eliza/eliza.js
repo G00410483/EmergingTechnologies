@@ -13,9 +13,16 @@ function getElizaResponse(input) {
         let match = input.match(rule.pattern);
         if (match) {
             // Handle cases where there might not be a capture group
+            // If there is no capture group, return the response as is
             let response = rule.response;
-            // Return the response with the match
-            return rule.response.replace("$1", match[1]);
+            // If there is a capture group, replace the placeholder with the captured value
+            // Iterate over the capture groups and replace the placeholders in the response
+            for (let i = 1; i < match.length; i++) {
+                // Replace the placeholder with the captured value
+                response = response.replace(`$${i}`, match[i]);
+            }
+            // Return the response with the replaced values
+            return response;
         }
     }
 }
