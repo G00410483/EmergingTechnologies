@@ -25,6 +25,8 @@ function getElizaResponse(input) {
             return response;
         }
     }
+    // Default response
+    return "Can you elaborate on that?";
 }
 
 // Function to process user input
