@@ -176,3 +176,19 @@ function resetChat() {
     // Clear the chat box
     chatBox.innerHTML = ''; // Clear all messages
 }
+
+// Function to handle user input
+function addMessage(content, sender) {
+    // Get the chat box
+    const chatBox = document.getElementById('chat-box');
+    // Create a new message element
+    const message = document.createElement('div');
+    // Add the appropriate classes
+    message.classList.add('message', sender); // 'sender' should be 'user' or 'bot'
+    message.innerHTML = content;
+
+   
+
+    chatBox.appendChild(message);
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
