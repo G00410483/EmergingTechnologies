@@ -31,29 +31,27 @@ function getElizaResponse(input) {
 
 // Function to process user input
 // Takes the input from the user and displays it in the chat box
-function processInput(input) {
+function processInput(event) {
     event.preventDefault(); // Prevent form submission
     // Get the input field and chat box
     const inputField = document.getElementById("user-input");
     // Get the chat box
     const chatBox = document.getElementById("chat-box");
-    // Get the user's message
+    // Get the user message
     const userMessage = inputField.value;
 
-    if (userMessage.trim() === '') return; // If the input is empty, do nothing
+    // Check if the user message is empty
+    if (userMessage.trim() === '') return;
     
-    // Display user's message
+    // Display the user message in the chat box
     chatBox.innerHTML += `<p><strong>You:</strong> ${userMessage}</p>`;
-    
-    // Get ELIZA's response
+    // Get the Eliza response
     const response = getElizaResponse(userMessage);
-    // Display ELIZA's response
+    // Display the Eliza response in the chat box
     chatBox.innerHTML += `<p><strong>ELIZA:</strong> ${response}</p>`;
-    
     // Scroll to the bottom of the chat box
     chatBox.scrollTop = chatBox.scrollHeight;
-    
-    // Clear input field
+    // Clear the input field
     inputField.value = '';
 }
 
@@ -65,3 +63,6 @@ function resetChat() {
     // Clear the chat box
     chatBox.innerHTML = ''; // Clear all messages
 }
+
+// Export the functions
+window.processInput = processInput;
