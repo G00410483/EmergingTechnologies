@@ -130,73 +130,86 @@ const elizaResponses = [
 ];
 
 // Function to get the Eliza response
-// Takes an input string and returns a response
 function getElizaResponse(input) {
     // Loop through the rules and find a match
     for (let rule of elizaResponses) {
         // Check if the input matches the pattern
         let match = input.match(rule.pattern);
         if (match) {
-            // Return the response with the match
-            return rule.response.replace("$1", match[1]);
+            // Replace $1 with the first captured group
+            return rule.response.replace("$1", match[1] || '');
         }
     }
+    // Return a default response if no pattern matches
+    return "I'm here to listen. Please, go on."; // Default response if no pattern matches
 }
 
 // Function to process user input
-// Takes the input from the user and displays it in the chat box
 function processInput() {
+    // Get the user input
     const userInputField = document.getElementById('user-input');
+    // Trim the input and check if it's empty
     const userText = userInputField.value.trim();
 
-    if (userText === '') return; // Do nothing if input is empty
+    // Do nothing if input is empty
+    if (userText === '') return; 
 
-    // Display the user's message
+    // Add the user's message to the chat box
     addMessage(userText, 'user');
+    userInputField.value = ''; // Clear the input field
+    // foucs() method is used to set focus on the specified element
+    userInputField.focus(); // Refocus for user convenience
 
-    // Clear the input field
-    userInputField.value = '';
-
-    // Process the user's input to get ELIZA's response
-    const elizaResponse = eliza.transform(userText); // Assuming you have an ELIZA instance
+    // Get ELIZA's response
+    const elizaResponse = getElizaResponse(userText);
 
     // Display ELIZA's response after a short delay
     setTimeout(() => {
+        // Add ELIZA's message to the chat box
+        // 'bot' is the sender of the message
+        // 500 milliseconds delay to simulate typing
         addMessage(elizaResponse, 'bot');
     }, 500);
 }
 
 // Reset the chat history
-// Clears all messages from the chat box
 function resetChat() {
-    // Get the chat box
-    const chatBox = document.getElementById("chat-box");
-    // Clear the chat box
-    chatBox.innerHTML = ''; // Clear all messages
+    document.getElementById("chat-box").innerHTML = '';
 }
 
-// Function to handle user input
+// Function to add a message to the chat box
+// content: message content
+// sender: 'user' or 'bot'
 function addMessage(content, sender) {
-    // Get the chat box
+    // Get the chat box element
     const chatBox = document.getElementById('chat-box');
     // Create a new message element
     const message = document.createElement('div');
-    // Add the appropriate classes
-    message.classList.add('message', sender); // 'sender' should be 'user' or 'bot'
-    // Set the text content
+    // Add the 'message' and sender class to the message element
+    message.classList.add('message', sender);
+    // Set the message content
     message.innerHTML = content;
 
-    // Add timestamp
-    const time = new Date();
-    // Format the time as HH:MM
+    // Create a timestamp element
     const timestamp = document.createElement('span');
-    // Add the 'timestamp' class
+    // Add the 'timestamp' class to the timestamp element
     timestamp.classList.add('timestamp');
-    // Set the text content to the formatted time
-    timestamp.textContent = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    // Set the timestamp content to the current time
+    timestamp.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     // Append the timestamp to the message
     message.appendChild(timestamp);
 
+    // Append the message to the chat box
     chatBox.appendChild(message);
+    // Scroll the chat box to the bottom
     chatBox.scrollTop = chatBox.scrollHeight;
 }
+
+// Event listener for Enter key
+document.getElementById('user-input').addEventListener('keypress', (e) => {
+    // Process the input if the Enter key is pressed
+    if (e.key === 'Enter') {
+        processInput();
+    }
+});
+
