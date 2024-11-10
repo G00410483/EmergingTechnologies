@@ -145,27 +145,25 @@ function getElizaResponse(input) {
 
 // Function to process user input
 // Takes the input from the user and displays it in the chat box
-function processInput(input) {
-    // Get the input field and chat box
-    const inputField = document.getElementById("user-input");
-    // Get the chat box
-    const chatBox = document.getElementById("chat-box");
-    // Get the user's message
-    const userMessage = inputField.value;
-    
-    // Display user's message
-    chatBox.innerHTML += `<p><strong>You:</strong> ${userMessage}</p>`;
-    
-    // Get ELIZA's response
-    const response = getElizaResponse(userMessage);
-    // Display ELIZA's response
-    chatBox.innerHTML += `<p><strong>ELIZA:</strong> ${response}</p>`;
-    
-    // Scroll to the bottom of the chat box
-    chatBox.scrollTop = chatBox.scrollHeight;
-    
-    // Clear input field
-    inputField.value = '';
+function processInput() {
+    const userInputField = document.getElementById('user-input');
+    const userText = userInputField.value.trim();
+
+    if (userText === '') return; // Do nothing if input is empty
+
+    // Display the user's message
+    addMessage(userText, 'user');
+
+    // Clear the input field
+    userInputField.value = '';
+
+    // Process the user's input to get ELIZA's response
+    const elizaResponse = eliza.transform(userText); // Assuming you have an ELIZA instance
+
+    // Display ELIZA's response after a short delay
+    setTimeout(() => {
+        addMessage(elizaResponse, 'bot');
+    }, 500);
 }
 
 // Reset the chat history
