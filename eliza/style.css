@@ -1,4 +1,4 @@
-/* Reset default styles */
+
 * {
     margin: 0;
     padding: 0;
@@ -69,29 +69,53 @@ body {
 
 /* Messages styling */
 .message {
-    max-width: 70%;
-    margin-bottom: 10px;
+    max-width: 80%;
+    margin-bottom: 15px;
     padding: 10px 15px;
     border-radius: 20px;
-    color: #fff;
     word-wrap: break-word;
     position: relative;
     animation: fadeIn 0.3s ease;
 }
 
+/* User messages */
 .message.user {
     align-self: flex-end;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+    color: #fff;
+    border-bottom-right-radius: 5px;
 }
 
+.message.user::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: -10px;
+    border-width: 10px 0 0 10px;
+    border-style: solid;
+    border-color: transparent transparent transparent #185a9d;
+}
+
+/* ELIZA's messages */
 .message.bot {
     align-self: flex-start;
-    background: rgba(255, 255, 255, 0.2);
+    background: #fff;
+    color: #333;
+    border-bottom-left-radius: 5px;
+}
+
+.message.bot::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -10px;
+    border-width: 10px 10px 0 0;
+    border-style: solid;
+    border-color: transparent #fff transparent transparent;
 }
 
 /* Message timestamp */
-.message::after {
-    content: attr(data-time);
+.message .timestamp {
     display: block;
     font-size: 10px;
     color: #ccc;
@@ -147,6 +171,13 @@ body {
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
 }
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 
 /* Animations */
 /* Reference: https://stackoverflow.com/questions/71758805/i-wish-this-animation-would-stay-on-the-page-for-a-few-seconds-and-then-fade-awa */
