@@ -81,8 +81,8 @@ body {
 /* User messages */
 .message.user {
     align-self: flex-end;
-    background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
-    color: #fff;
+    background: #fff;
+    color: #333;
     border-bottom-right-radius: 5px;
 }
 
@@ -118,7 +118,7 @@ body {
 .message .timestamp {
     display: block;
     font-size: 10px;
-    color: #ccc;
+    color: #333;
     margin-top: 5px;
     text-align: right;
 }
