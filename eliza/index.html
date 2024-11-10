@@ -24,7 +24,14 @@
 
         </div>
     </div>
-    <script src="eliza.js"></script>
-</body>
+     <!-- Include the responses.js script first -->
+     <script src="responses.js" type="module"></script>
+     <!-- Include the eliza.js script -->
+     <script src="eliza.js" type="module"></script>
+ 
+     <script>
+         // Add an event listener to the form to handle user input
+         document.getElementById('chat-form').addEventListener('submit', processInput);
+     </script>
 </html>
 
