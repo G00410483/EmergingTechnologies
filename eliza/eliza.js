@@ -5,6 +5,8 @@ import elizaResponses from './responses.js';
 // Function to get the Eliza response
 // Takes an input string and returns a response
 function getElizaResponse(input) {
+    // Normalize input
+    const normalizedInput = input.trim().toLowerCase();
     // Loop through the rules and find a match
     for (let rule of elizaResponses) {
         // Check if the input matches the pattern
