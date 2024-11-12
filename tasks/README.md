@@ -66,8 +66,18 @@ The purpose of this task is to assess the quality of the generated text by calcu
   - Parameters:
       - generated_text (str): The generated text by trigram model.
       - valid_words (set): A set of valid English words loaded from words.txt.
-  - Returns: A float representing the percetage of valid ENglish words in the generated text. 
+  - Returns: A float representing the percetage of valid English words in the generated text. 
 
+## TASK 4: Export Model as JSON File
 
+### Overview
+This task exports the trigram model created in Task1 to JSON file. This allows model data to be accessed later or integrated with other projects.
 
+### Function Description
+#### export_trigram_model_to_json(trigram_counts, filename='trigram.json'
+  - Exports trigram model to a JSON file.
+  - Parameters:
+      - trigram_counts (dict)- Trigram model to be exported.
+      - file_name (str)- The name of the JSON file to save the model.
+  - Result- trigram model is saved to a JSON file in the specified location.
 
