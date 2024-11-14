@@ -1,93 +1,97 @@
-
+/* Applies to all elements to remove default padding, margin, and set box-sizing to border-box */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body style */
+/* Body Style: Defines main layout properties for the body to create a full-screen, centered chat interface */
 body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Poppins', sans-serif; /* Applies 'Poppins' font for clean, modern typography */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradient background for aesthetic appeal */
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    justify-content: center; /* Centers chat container horizontally */
+    align-items: center; /* Centers chat container vertically */
+    height: 100vh; /* Full viewport height for centered positioning */
 }
 
-/* Chat container style */
+/* Chat Container: Wrapper for the chat UI, with translucent background and rounded corners */
 #chat-container {
-    width: 400px;
-    max-width: 90%;
-    background-color: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    width: 400px; /* Fixed width for consistent layout */
+    max-width: 90%; /* Responsive layout for smaller screens */
+    background-color: rgba(255, 255, 255, 0.1); /* Light translucent background */
+    backdrop-filter: blur(10px); /* Blur effect for enhanced visual style */
+    border-radius: 15px; /* Smooth, rounded corners */
+    overflow: hidden; /* Prevents overflow from content within */
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Soft shadow for a raised effect */
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Stack elements vertically within */
 }
 
-/* Chat header */
+/* Chat Header: Contains title and reset button at the top of the chat UI */
 #chat-header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.1);
+    justify-content: space-between; /* Title and reset button on opposite sides */
+    align-items: center; /* Centers elements vertically */
+    background-color: rgba(255, 255, 255, 0.1); /* Matches container background */
     padding: 15px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Subtle divider at the bottom */
 }
 
+/* Chat Header Title: Adjusts title styling within the header */
 #chat-header h1 {
-    font-size: 20px;
-    color: #fff;
+    font-size: 20px; /* Sets font size for readability */
+    color: #fff; /* White color for contrast against the background */
 }
 
+/* Reset Button: Styles the button that resets the chat */
 .reset-button {
-    background: none;
-    border: none;
-    cursor: pointer;
+    background: none; /* No background for simplicity */
+    border: none; /* Removes border */
+    cursor: pointer; /* Shows pointer cursor for interactivity */
 }
 
+/* SVG Icon in Reset Button */
 .reset-button svg {
-    fill: #fff;
-    transition: transform 0.2s ease;
+    fill: #fff; /* White color for visibility */
+    transition: transform 0.2s ease; /* Smooth transition for hover effect */
 }
 
 .reset-button:hover svg {
-    transform: rotate(90deg);
+    transform: rotate(90deg); /* Rotates icon on hover */
 }
 
-/* Chat box */
+/* Chat Box: The main area where messages appear */
 #chat-box {
-    flex: 1;
+    flex: 1; /* Fills available space */
     padding: 15px;
-    overflow-y: auto;
+    overflow-y: auto; /* Enables vertical scroll when content overflows */
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Stacks messages vertically */
 }
 
-/* Messages styling */
+/* Message Styling: Common properties for both user and bot messages */
 .message {
-    max-width: 80%;
+    max-width: 80%; /* Limits width for better readability */
     margin-bottom: 15px;
     padding: 10px 15px;
-    border-radius: 20px;
-    word-wrap: break-word;
-    position: relative;
-    animation: fadeIn 0.3s ease;
+    border-radius: 20px; /* Rounded corners for bubbles */
+    word-wrap: break-word; /* Prevents overflow by wrapping text */
+    position: relative; /* Allows positioning of speech bubble tails */
+    animation: fadeIn 0.3s ease; /* Smooth fade-in animation */
 }
 
-/* User messages */
+/* User Messages: Aligned to the right with unique styling */
 .message.user {
-    align-self: flex-end;
-    background: #fff;
-    color: #333;
-    border-bottom-right-radius: 5px;
+    align-self: flex-end; /* Positions message to the right */
+    background: #fff; /* White background for user messages */
+    color: #333; /* Dark text color for readability */
+    border-bottom-right-radius: 5px; /* Unique corner radius for differentiation */
 }
 
+/* User Message Tail */
 .message.user::after {
-    content: '';
+    content: ''; /* Creates the speech bubble tail */
     position: absolute;
     bottom: 0;
     right: -10px;
@@ -96,16 +100,17 @@ body {
     border-color: transparent transparent transparent #185a9d;
 }
 
-/* ELIZA's messages */
+/* Bot Messages: Aligned to the left with unique styling */
 .message.bot {
-    align-self: flex-start;
-    background: #fff;
-    color: #333;
-    border-bottom-left-radius: 5px;
+    align-self: flex-start; /* Positions message to the left */
+    background: #fff; /* White background for bot messages */
+    color: #333; /* Dark text color for readability */
+    border-bottom-left-radius: 5px; /* Unique corner radius for differentiation */
 }
 
+/* Bot Message Tail */
 .message.bot::after {
-    content: '';
+    content: ''; /* Creates the speech bubble tail */
     position: absolute;
     bottom: 0;
     left: -10px;
@@ -114,38 +119,41 @@ body {
     border-color: transparent #fff transparent transparent;
 }
 
-/* Message timestamp */
+/* Message Timestamp: Styling for optional message timestamp */
 .message .timestamp {
-    display: block;
-    font-size: 10px;
-    color: #333;
+    display: block; /* Ensures timestamp appears on a new line */
+    font-size: 10px; /* Smaller font for less emphasis */
+    color: #333; /* Dark text color */
     margin-top: 5px;
-    text-align: right;
+    text-align: right; /* Aligns to the right within the message */
 }
 
-/* Input container */
+/* Input Container: Contains the text input and send button */
 #input-container {
     display: flex;
     padding: 10px 15px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.1); /* Matches header background */
+    border-top: 1px solid rgba(255, 255, 255, 0.2); /* Subtle divider */
 }
 
+/* User Input Field: Styles for the text input */
 #user-input {
-    flex: 1;
+    flex: 1; /* Expands to fill available space */
     padding: 10px 15px;
-    border: none;
-    border-radius: 30px;
+    border: none; /* Removes border for a cleaner look */
+    border-radius: 30px; /* Rounded edges */
     font-size: 14px;
-    color: #fff;
-    background-color: rgba(255, 255, 255, 0.2);
-    outline: none;
+    color: #fff; /* White text for contrast */
+    background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+    outline: none; /* Removes default outline */
 }
 
+/* Placeholder Text in Input Field */
 #user-input::placeholder {
-    color: #ccc;
+    color: #ccc; /* Light gray placeholder for unobtrusive guidance */
 }
 
+/* Send Button: Positioned next to the input field */
 .send-button {
     background: none;
     border: none;
@@ -153,35 +161,30 @@ body {
     cursor: pointer;
 }
 
+/* SVG Icon in Send Button */
 .send-button svg {
-    fill: #fff;
-    transition: transform 0.2s ease;
+    fill: #fff; /* White color for visibility */
+    transition: transform 0.2s ease; /* Smooth transition for hover effect */
 }
 
 .send-button:hover svg {
-    transform: scale(1.1);
+    transform: scale(1.1); /* Scales icon slightly on hover */
 }
 
-/* Scrollbar styling */
+/* Scrollbar Styling for Chat Box */
 #chat-box::-webkit-scrollbar {
-    width: 5px;
+    width: 5px; /* Slim scrollbar width */
 }
 
 #chat-box::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    background-color: rgba(255, 255, 255, 0.2); /* Matches design scheme */
+    border-radius: 10px; /* Rounded scrollbar for a modern look */
 }
 
 
-/* Animations */
+/* Animation for Message Fade-in Effect */
 /* Reference: https://stackoverflow.com/questions/71758805/i-wish-this-animation-would-stay-on-the-page-for-a-few-seconds-and-then-fade-awa */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(10px); } /* Start transparent and slightly lowered */
+    to { opacity: 1; transform: translateY(0); } /* End fully visible and aligned */
 }
