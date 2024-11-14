@@ -1,35 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Set character encoding to UTF-8 to ensure proper display of all characters -->
     <meta charset="UTF-8">
+    <!-- Ensures the page is responsive on all devices by setting the viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Google Fonts for better typography -->
+    <!-- Google Fonts for enhanced typography: using 'Poppins' with weights 300, 500, and 700 for stylistic variety -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-    <!-- Link to the new stylesheet -->
+    <!-- Link to external CSS file to separate styling from HTML structure -->
     <link rel="stylesheet" href="style.css">
+    <!-- Set page title to "ELIZA Chatbot" for better readability in the browser tab -->
     <title>ELIZA Chatbot</title>
 </head>
 <body>
+    <!-- Main container for chat application layout -->
     <div id="chat-container">
+        <!-- Chat header section for the title and reset button -->
         <div id="chat-header">
+            <!-- Title of the chatbot application -->
             <h1>ELIZA Chatbot</h1>
+            <!-- Reset button to clear chat history, calling resetChat() function on click -->
             <button onclick="resetChat()" class="reset-button" title="Reset Chat">
+                <!-- SVG icon representing a reset/restart action -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#fff" viewBox="0 0 24 24">
                     <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
                 </svg>
             </button>
         </div>
+        <!-- Container for displaying the chat messages -->
         <div id="chat-box"></div>
+        <!-- Input section for typing and sending messages -->
         <div id="input-container">
+            <!-- Text input where users type their messages, autofocus to enable typing immediately after page load -->
             <input type="text" id="user-input" placeholder="Type your message here..." autofocus>
+            <!-- Send button to submit the user's message, triggers processInput() function on click -->
             <button onclick="processInput()" class="send-button">
+                <!-- SVG icon representing a send action (like a paper plane) -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#fff" viewBox="0 0 24 24">
                     <path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/>
                 </svg>
             </button>
         </div>
     </div>
+    <!-- JavaScript file linked for chatbot functionality, to process and respond to user inputs -->
     <script src="eliza.js"></script>
 </body>
 </html>
-
