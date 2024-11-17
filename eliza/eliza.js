@@ -2,7 +2,7 @@
 
 // Common repsonses
 const elizaResponses = [
-    { pattern: /hello|hi|hey|greetings|good (morning|afternoon|evening)/i, response: "Hello! How are you feeling today?" },
+    { pattern: /\bhello\b|hi|hey|greetings|good\s+(morning|afternoon|evening)/i, response: "Hello! How are you feeling today?" },
     { pattern: /my name is (.*)/i, response: "It's a pleasure to meet you, $1. How has your day been so far?" },
     { pattern: /I need (.*)/i, response: "What makes you feel you need $1?" },
     { pattern: /I (?:am|feel) (?:really )?(sad|unhappy|depressed|down)/i, response: "I'm sorry to hear that you're feeling $1. Would you like to talk about what's causing these feelings?" },
