@@ -191,6 +191,7 @@ function addMessage(content, sender) {
     message.innerHTML = content;
 
     // Create a timestamp element
+    // Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleTimeString
     const timestamp = document.createElement('span');
     // Add the 'timestamp' class to the timestamp element
     timestamp.classList.add('timestamp');
@@ -201,7 +202,9 @@ function addMessage(content, sender) {
 
     // Append the message to the chat box
     chatBox.appendChild(message);
+
     // Scroll the chat box to the bottom
+    // Reference: https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTop
     chatBox.scrollTop = chatBox.scrollHeight;
 }
 
