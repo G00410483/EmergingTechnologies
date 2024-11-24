@@ -3,6 +3,15 @@ const chatBox = document.getElementById("chat-box");
 const userInput = document.getElementById("user-input");
 const sendButton = document.getElementById("send-button");
 
+// Conversation state
+let conversationState = {
+    // Last topic of conversation
+    lastTopic: null,
+    // User's mood
+    mood: null
+};
+
+
 // Common repsonses
 // Responses are mapped to patterns
 // Rules are matched in order
@@ -143,13 +152,6 @@ const elizaResponses = [
     pattern: new RegExp(rule.pattern.source, rule.pattern.flags) // Precompile regex
 }));
 
-// Conversation state
-let conversationState = {
-    // Last topic of conversation
-    lastTopic: null,
-    // User's mood
-    mood: null
-};
 
 // Function to get ELIZA's response based on user input
 // Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match
@@ -171,7 +173,7 @@ function getElizaResponse(input) {
 
 // Synonyms for normalization
 // Used for normalizing user input before matching
-const synonyms = {
+const sentiment = {
     happy: ["joyful", "content", "pleased"],
     sad: ["unhappy", "depressed", "down"]
 };
@@ -188,6 +190,13 @@ function detectSentiment(input) {
     }
     return 'neutral';
 }
+
+// Generate a follow-up response based on detected sentiment
+const followUps = {
+    positive: "I'm glad to hear that! What's been the highlight of your day?",
+    negative: "I'm here to listen. What's been on your mind?",
+    neutral: "That's interesting! Can you share more?",
+};
 
 // Normalize user input by replacing synonyms with canonical forms
 // Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
