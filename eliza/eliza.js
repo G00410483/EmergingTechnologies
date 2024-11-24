@@ -149,6 +149,7 @@ let conversationState = {
 };
 
 // Function to get ELIZA's response based on user input
+// Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match
 function getElizaResponse(input) {
     // Check if the user mentioned the last topic of conversation
     for (let rule of elizaResponses) {
@@ -157,20 +158,29 @@ function getElizaResponse(input) {
         if (match) {
             // conversationState.lastTopic is set to the first capturing group
             conversationState.lastTopic = match[1] || null;
+            // Return the response with the first capturing group replaced
             return rule.response.replace("$1", match[1] || '');
         }
     }
+    // If no rule matched, return a default response
     return "I'm here to listen. Please, go on.";
 }
 
+// Synonyms for normalization
+// Used for normalizing user input before matching
 const synonyms = {
     happy: ["joyful", "content", "pleased"],
     sad: ["unhappy", "depressed", "down"]
 };
 
+// Normalize user input by replacing synonyms with canonical forms
+// Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
 function normalizeInput(input) {
+    // For each entry in the synonyms object
     for (let [canonical, syns] of Object.entries(synonyms)) {
+        // Create a regular expression with word boundaries
         const regex = new RegExp(`\\b(${syns.join('|')})\\b`, 'gi');
+        // Replace the synonyms with the canonical form
         input = input.replace(regex, canonical);
     }
     return input;
@@ -178,15 +188,23 @@ function normalizeInput(input) {
 
 // Apply normalization before matching
 function processInput() {
+    // Get the user input field
     const userInputField = document.getElementById('user-input');
+    // Normalize the user input
     const userText = normalizeInput(userInputField.value.trim());
 
+    // If the user input is empty, return
     if (userText === '') return;
+    // Add the user message to the chat box
     addMessage(userText, 'user');
+    // Clear the user input field
     userInputField.value = '';
+    // Focus on the user input field
     userInputField.focus();
 
+    // Get the ELIZA response
     const elizaResponse = getElizaResponse(userText);
+    // Add the ELIZA response to the chat box
     setTimeout(() => addMessage(elizaResponse, 'bot'), 500);
 }
 
