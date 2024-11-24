@@ -1,6 +1,8 @@
 /* Filename: eliza.js */
 
 // Common repsonses
+// Responses are mapped to patterns
+// Rules are matched in order
 const elizaResponses = [
     { pattern: /\bhello\b|hi|hey|greetings|good\s+(morning|afternoon|evening)/i, response: "Hello! How are you feeling today?" },
     { pattern: /my name is (.*)/i, response: "It's a pleasure to meet you, $1. How has your day been so far?" },
@@ -128,19 +130,32 @@ const elizaResponses = [
     { pattern: /I feel empowered/i, response: "That's fantastic! What's contributing to your sense of empowerment?" },
     { pattern: /.*/, response: "Please, tell me more about that." }
 ].map(rule => ({
+    // ... is the spread operator
+    // rule is an object with pattern and response properties
     ...rule,
+    // pattern is a regular expression
+    // new RegExp() is used to create a new regular expression
+    // rule.pattern.source is the pattern string
+    // rule.pattern.flags is the pattern flags
     pattern: new RegExp(rule.pattern.source, rule.pattern.flags) // Precompile regex
 }));
 
+// Conversation state
 let conversationState = {
+    // Last topic of conversation
     lastTopic: null,
+    // User's mood
     mood: null
 };
 
+// Function to get ELIZA's response based on user input
 function getElizaResponse(input) {
+    // Check if the user mentioned the last topic of conversation
     for (let rule of elizaResponses) {
+        // match() method searches a string for a match against a regular expression
         let match = input.match(rule.pattern);
         if (match) {
+            // conversationState.lastTopic is set to the first capturing group
             conversationState.lastTopic = match[1] || null;
             return rule.response.replace("$1", match[1] || '');
         }
