@@ -127,7 +127,10 @@ const elizaResponses = [
     { pattern: /I want to learn (.*)/i, response: "Learning new things is enriching. How will you start with $1?" },
     { pattern: /I feel empowered/i, response: "That's fantastic! What's contributing to your sense of empowerment?" },
     { pattern: /.*/, response: "Please, tell me more about that." }
-];
+].map(rule => ({
+    ...rule,
+    pattern: new RegExp(rule.pattern.source, rule.pattern.flags) // Precompile regex
+}));
 
 // Function to get the Eliza response
 function getElizaResponse(input) {
@@ -152,7 +155,7 @@ function processInput() {
     const userText = userInputField.value.trim();
 
     // Do nothing if input is empty
-    if (userText === '') return; 
+    if (userText === '') return;
 
     // Add the user's message to the chat box
     addMessage(userText, 'user');
