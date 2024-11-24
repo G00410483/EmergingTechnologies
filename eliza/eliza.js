@@ -163,33 +163,33 @@ function getElizaResponse(input) {
     return "I'm here to listen. Please, go on.";
 }
 
-// Function to process user input
-function processInput() {
-    // Get the user input
-    const userInputField = document.getElementById('user-input');
-    // Trim the input and check if it's empty
-    const userText = userInputField.value.trim();
+const synonyms = {
+    happy: ["joyful", "content", "pleased"],
+    sad: ["unhappy", "depressed", "down"]
+};
 
-    // Do nothing if input is empty
-    if (userText === '') return;
-
-    // Add the user's message to the chat box
-    addMessage(userText, 'user');
-    userInputField.value = ''; // Clear the input field
-    // foucs() method is used to set focus on the specified element
-    userInputField.focus(); // Refocus for user convenience
-
-    // Get ELIZA's response
-    const elizaResponse = getElizaResponse(userText);
-
-    // Display ELIZA's response after a short delay
-    setTimeout(() => {
-        // Add ELIZA's message to the chat box
-        // 'bot' is the sender of the message
-        // 500 milliseconds delay to simulate typing
-        addMessage(elizaResponse, 'bot');
-    }, 500);
+function normalizeInput(input) {
+    for (let [canonical, syns] of Object.entries(synonyms)) {
+        const regex = new RegExp(`\\b(${syns.join('|')})\\b`, 'gi');
+        input = input.replace(regex, canonical);
+    }
+    return input;
 }
+
+// Apply normalization before matching
+function processInput() {
+    const userInputField = document.getElementById('user-input');
+    const userText = normalizeInput(userInputField.value.trim());
+
+    if (userText === '') return;
+    addMessage(userText, 'user');
+    userInputField.value = '';
+    userInputField.focus();
+
+    const elizaResponse = getElizaResponse(userText);
+    setTimeout(() => addMessage(elizaResponse, 'bot'), 500);
+}
+
 
 // Reset the chat history
 function resetChat() {
