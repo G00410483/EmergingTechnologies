@@ -132,19 +132,20 @@ const elizaResponses = [
     pattern: new RegExp(rule.pattern.source, rule.pattern.flags) // Precompile regex
 }));
 
-// Function to get the Eliza response
+let conversationState = {
+    lastTopic: null,
+    mood: null
+};
+
 function getElizaResponse(input) {
-    // Loop through the rules and find a match
     for (let rule of elizaResponses) {
-        // Check if the input matches the pattern
         let match = input.match(rule.pattern);
         if (match) {
-            // Replace $1 with the first captured group
+            conversationState.lastTopic = match[1] || null;
             return rule.response.replace("$1", match[1] || '');
         }
     }
-    // Return a default response if no pattern matches
-    return "I'm here to listen. Please, go on."; // Default response if no pattern matches
+    return "I'm here to listen. Please, go on.";
 }
 
 // Function to process user input
