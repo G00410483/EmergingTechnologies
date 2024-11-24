@@ -1,4 +1,7 @@
-/* Filename: eliza.js */
+// Variables for chat UI and conversation state
+const chatBox = document.getElementById("chat-box");
+const userInput = document.getElementById("user-input");
+const sendButton = document.getElementById("send-button");
 
 // Common repsonses
 // Responses are mapped to patterns
@@ -172,6 +175,19 @@ const synonyms = {
     happy: ["joyful", "content", "pleased"],
     sad: ["unhappy", "depressed", "down"]
 };
+
+// Sentiment analysis
+function detectSentiment(input) {
+    // Sentiment analysis dictionary
+    // Words associated with positive, negative, and neutral sentiments
+    for (let [sentiment, words] of Object.entries(sentiments)) {
+        // Create a regular expression with word boundaries
+        const regex = new RegExp(`\\b(${words.join('|')})\\b`, 'i');
+        // Test if the input contains any sentiment words
+        if (regex.test(input)) return sentiment;
+    }
+    return 'neutral';
+}
 
 // Normalize user input by replacing synonyms with canonical forms
 // Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
