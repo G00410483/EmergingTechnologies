@@ -141,13 +141,30 @@ const elizaResponses = [
 }));
 
 const synonyms = {
-    hello: ["hi", "hey", "greetings"],
-    goodbye: ["bye", "farewell", "see you"],
-    happy: ["joyful", "cheerful", "content"],
-    sad: ["unhappy", "down", "depressed"],
-    help: ["assist", "aid", "support"]
-    // Add more words and their synonyms as needed
+    hello: ["hi", "hey", "greetings", "howdy", "what's up", "morning", "afternoon", "evening", "salutations"],
+    goodbye: ["bye", "farewell", "see you", "take care", "later", "adieu", "so long"],
+    happy: ["joyful", "cheerful", "content", "ecstatic", "thrilled", "delighted", "blissful", "satisfied", "overjoyed", "elated"],
+    sad: ["unhappy", "down", "depressed", "heartbroken", "blue", "sorrowful", "gloomy", "melancholic", "dejected", "miserable"],
+    angry: ["mad", "furious", "irate", "enraged", "upset", "annoyed", "irritated", "exasperated", "vexed", "aggravated"],
+    stressed: ["overwhelmed", "anxious", "worried", "pressured", "tense", "panicked", "frazzled", "burdened"],
+    fearful: ["afraid", "scared", "terrified", "anxious", "nervous", "alarmed", "panicked", "apprehensive", "frightened"],
+    love: ["adore", "cherish", "appreciate", "admire", "care for", "value", "treasure", "like"],
+    hate: ["dislike", "despise", "detest", "loathe", "abhor", "resent"],
+    help: ["assist", "aid", "support", "guide", "serve", "facilitate"],
+    excited: ["thrilled", "eager", "enthusiastic", "elated", "delighted", "overjoyed", "ecstatic"],
+    tired: ["exhausted", "weary", "fatigued", "drained", "worn out", "sleepy", "drowsy"],
+    calm: ["peaceful", "relaxed", "tranquil", "serene", "soothing", "composed"],
+    confused: ["perplexed", "bewildered", "puzzled", "baffled", "uncertain", "disoriented"],
+    nervous: ["anxious", "worried", "uneasy", "apprehensive", "jumpy", "restless", "on edge"],
+    strong: ["resilient", "capable", "powerful", "tough", "sturdy", "robust", "confident"],
+    weak: ["vulnerable", "fragile", "frail", "delicate", "exhausted", "feeble"],
+    regret: ["remorse", "guilt", "repentance", "shame", "sorrow", "contrition"],
+    grateful: ["thankful", "appreciative", "obliged", "indebted", "blessed"],
+    inspired: ["motivated", "driven", "uplifted", "encouraged", "empowered"],
+    lonely: ["isolated", "alone", "solitary", "abandoned", "neglected"],
+    worried: ["concerned", "anxious", "troubled", "distressed", "fearful", "uneasy"]
 };
+
 
 
 // Conversation state
