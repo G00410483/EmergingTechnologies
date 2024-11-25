@@ -193,18 +193,19 @@ function detectSentiment(input) {
     return 'neutral';
 }
 
-// Normalize user input by replacing synonyms with canonical forms
-// Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
+// Consolidated synonym replacement into single regex operation using mapping object
 function normalizeInput(input) {
-    // For each entry in the synonyms object
-    for (let [canonical, syns] of Object.entries(synonyms)) {
-        // Create a regular expression with word boundaries
-        const regex = new RegExp(`\\b(${syns.join('|')})\\b`, 'gi');
-        // Replace the synonyms with the canonical form
-        input = input.replace(regex, canonical);
-    }
-    return input;
+    // Create a synonym map object
+    const synonymMap = Object.entries(synonyms)
+        // Map each synonym to its canonical form
+        .flatMap(([canonical, syns]) => syns.map(syn => ({ [syn]: canonical })))
+        // Merge all objects into a single object
+        .reduce((acc, cur) => ({ ...acc, ...cur }), {});
+
+    // Return the input with synonyms replaced
+    return input.replace(/\b\w+\b/g, (word) => synonymMap[word.toLowerCase()] || word);
 }
+
 
 // Apply normalization before matching
 function processInput() {
