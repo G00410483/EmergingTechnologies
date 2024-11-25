@@ -1,16 +1,4 @@
-// Variables for chat UI and conversation state
-const chatBox = document.getElementById("chat-box");
-const userInput = document.getElementById("user-input");
-const sendButton = document.getElementById("send-button");
-
-// Conversation state
-let conversationState = {
-    // Last topic of conversation
-    lastTopic: null,
-    // User's mood
-    mood: null
-};
-
+/* Filename: eliza.js */
 
 // Common repsonses
 // Responses are mapped to patterns
@@ -152,28 +140,42 @@ const elizaResponses = [
     pattern: new RegExp(rule.pattern.source, rule.pattern.flags) // Precompile regex
 }));
 
+// Conversation state
+let conversationState = {
+    // Last topic of conversation
+    lastTopic: null,
+    // User's mood
+    mood: null
+};
+
+// Function to match a pattern in the input
+function matchPattern(input, rule) {
+    // match() method searches a string for a match against a regular expression
+    const match = input.match(rule.pattern);
+    // Return an object with match and capture properties
+    return match ? { match: true, capture: match[1] || null } : { match: false };
+}
 
 // Function to get ELIZA's response based on user input
 // Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match
 function getElizaResponse(input) {
-    // Check if the user mentioned the last topic of conversation
+    // Loop through each rule in the elizaResponses array
     for (let rule of elizaResponses) {
-        // match() method searches a string for a match against a regular expression
-        let match = input.match(rule.pattern);
+        // Call the matchPattern function to check if the input matches the rule
+        const { match, capture } = matchPattern(input, rule);
+        // If the input matches the rule
         if (match) {
-            // conversationState.lastTopic is set to the first capturing group
-            conversationState.lastTopic = match[1] || null;
-            // Return the response with the first capturing group replaced
-            return rule.response.replace("$1", match[1] || '');
+            conversationState.lastTopic = capture;
+            // Return the response with the capture group
+            return rule.response.replace("$1", capture || '');
         }
     }
-    // If no rule matched, return a default response
     return "I'm here to listen. Please, go on.";
 }
 
 // Synonyms for normalization
 // Used for normalizing user input before matching
-const sentiment = {
+const synonyms = {
     happy: ["joyful", "content", "pleased"],
     sad: ["unhappy", "depressed", "down"]
 };
@@ -190,13 +192,6 @@ function detectSentiment(input) {
     }
     return 'neutral';
 }
-
-// Generate a follow-up response based on detected sentiment
-const followUps = {
-    positive: "I'm glad to hear that! What's been the highlight of your day?",
-    negative: "I'm here to listen. What's been on your mind?",
-    neutral: "That's interesting! Can you share more?",
-};
 
 // Normalize user input by replacing synonyms with canonical forms
 // Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
