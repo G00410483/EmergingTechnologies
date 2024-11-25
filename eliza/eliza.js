@@ -175,9 +175,10 @@ function getElizaResponse(input) {
 
 // Synonyms for normalization
 // Used for normalizing user input before matching
-const synonyms = {
-    happy: ["joyful", "content", "pleased"],
-    sad: ["unhappy", "depressed", "down"]
+const sentiments = {
+    positive: ['happy', 'joyful', 'excited'],
+    negative: ['sad', 'angry', 'stressed'],
+    neutral: ['okay', 'fine', 'normal']
 };
 
 // Sentiment analysis
@@ -223,8 +224,15 @@ function processInput() {
     // Focus on the user input field
     userInputField.focus();
 
+    // Get the sentiment of the user input
+    const sentiment = detectSentiment(userText);
+
     // Get the ELIZA response
     const elizaResponse = getElizaResponse(userText);
+
+    const enhancedResponse = sentiment === 'negative' ? 
+        "I'm here for you. " + elizaResponse : elizaResponse;
+
     // Add the ELIZA response to the chat box
     setTimeout(() => addMessage(elizaResponse, 'bot'), 500);
 }
