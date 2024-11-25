@@ -140,6 +140,16 @@ const elizaResponses = [
     pattern: new RegExp(rule.pattern.source, rule.pattern.flags) // Precompile regex
 }));
 
+const synonyms = {
+    hello: ["hi", "hey", "greetings"],
+    goodbye: ["bye", "farewell", "see you"],
+    happy: ["joyful", "cheerful", "content"],
+    sad: ["unhappy", "down", "depressed"],
+    help: ["assist", "aid", "support"]
+    // Add more words and their synonyms as needed
+};
+
+
 // Conversation state
 let conversationState = {
     // Last topic of conversation
@@ -227,14 +237,45 @@ function processInput() {
     // Get the sentiment of the user input
     const sentiment = detectSentiment(userText);
 
+    // Show the typing indicator
+    showTypingIndicator();
+
     // Get the ELIZA response
     const elizaResponse = getElizaResponse(userText);
 
-    const enhancedResponse = sentiment === 'negative' ? 
+    const enhancedResponse = sentiment === 'negative' ?
         "I'm here for you. " + elizaResponse : elizaResponse;
 
-    // Add the ELIZA response to the chat box
-    setTimeout(() => addMessage(elizaResponse, 'bot'), 500);
+    setTimeout(() => {
+        removeTypingIndicator();
+        addMessage(elizaResponse, 'bot');
+    }, 1000); // Simulate typing delay
+}
+
+// Function to show the typing indicator
+function showTypingIndicator() {
+    // Get the chat box element
+    const chatBox = document.getElementById('chat-box');
+    // Create a new div element for the typing indicator
+    const typingIndicator = document.createElement('div');
+    // Set the id and classes for the typing indicator
+    typingIndicator.id = 'typing-indicator';
+    // Add the 'message' and 'bot' classes to the typing indicator
+    typingIndicator.classList.add('message', 'bot');
+    // Set the typing indicator content
+    typingIndicator.innerHTML = "Eliza is typing...";
+    // Append the typing indicator to the chat box
+    chatBox.appendChild(typingIndicator);
+    // Scroll the chat box to the bottom
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+// Function to remove the typing indicator
+function removeTypingIndicator() {
+    // Get the typing indicator element
+    const typingIndicator = document.getElementById('typing-indicator');
+    // If the typing indicator exists, remove it
+    if (typingIndicator) typingIndicator.remove();
 }
 
 
