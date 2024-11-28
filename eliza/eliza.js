@@ -4,55 +4,13 @@
 // Responses are mapped to patterns
 // Rules are matched in order
 const elizaResponses = [
-    // Greeting patterns
-    {
-        pattern: /\bhello\b|hi|hey|greetings/i,
+    { 
+        pattern: /\bhello\b|hi|hey|greetings/i, 
         response: [
             "Hello! How are you feeling today?",
             "Hi there! What's on your mind?",
             "Hey! How can I assist you?"
         ]
-    },
-    // Date, Time, Day patterns
-    {
-        pattern: /\b(what day is it|today's day|current day)\b/i,
-        response: () => {
-            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-            const today = new Date().getDay();
-            return `Today is ${days[today]}.`;
-        }
-    },
-    {
-        pattern: /\b(what time is it|current time|time now)\b/i,
-        response: () => {
-            const now = new Date();
-            const hours = now.getHours();
-            const minutes = now.getMinutes();
-            const formattedTime = `${hours % 12 || 12}:${minutes < 10 ? '0' + minutes : minutes} ${hours >= 12 ? 'PM' : 'AM'}`;
-            return `The current time is ${formattedTime}.`;
-        }
-    },
-    {
-        pattern: /\b(what is the date|today's date|current date)\b/i,
-        response: () => {
-            const now = new Date();
-            const month = now.getMonth() + 1; // Months are zero-indexed
-            const day = now.getDate();
-            const year = now.getFullYear();
-            return `Today's date is ${month}/${day}/${year}.`;
-        }
-    },
-    {
-        pattern: /\b(tell me about (monday|tuesday|wednesday|thursday|friday|saturday|sunday))\b/i,
-        response: (match) => {
-            const day = match[2].charAt(0).toUpperCase() + match[2].slice(1);
-            return `Ah, ${day}! What would you like to discuss about ${day}?`;
-        }
-    },
-    // Clarify "What is it?"
-    {
-        pattern: /\b(what is it)\b/i,
-        response: "Could you clarify what you mean by 'it'? I'm here to help."
     },
     { pattern: /my name is (.*)/i, response: "It's a pleasure to meet you, $1. How has your day been so far?" },
     { pattern: /I need (.*)/i, response: "What makes you feel you need $1?" },
@@ -179,6 +137,43 @@ const elizaResponses = [
     { pattern: /I feel empowered/i, response: "That's fantastic! What's contributing to your sense of empowerment?" },
     { pattern: /.*/, response: "Please, tell me more about that." },
 
+    
+    // Date, Time, Day
+    {
+        pattern: /\b(what day is it|today's day|current day)\b/i,
+        response: () => {
+            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const today = new Date().getDay();
+            return `Today is ${days[today]}.`;
+        }
+    },
+    {
+        pattern: /\b(what time is it|current time|time now)\b/i,
+        response: () => {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const formattedTime = `${hours % 12 || 12}:${minutes < 10 ? '0' + minutes : minutes} ${hours >= 12 ? 'PM' : 'AM'}`;
+            return `The current time is ${formattedTime}.`;
+        }
+    },
+    {
+        pattern: /\b(what is the date|today's date|current date)\b/i,
+        response: () => {
+            const now = new Date();
+            const month = now.getMonth() + 1; // Months are zero-indexed
+            const day = now.getDate();
+            const year = now.getFullYear();
+            return `Today's date is ${month}/${day}/${year}.`;
+        }
+    },
+    {
+        pattern: /\b(tell me about (monday|tuesday|wednesday|thursday|friday|saturday|sunday))\b/i,
+        response: (match) => {
+            const day = match[2].charAt(0).toUpperCase() + match[2].slice(1);
+            return `Ah, ${day}! What would you like to discuss about ${day}?`;
+        }
+    }
 ].map(rule => ({
     // ... is the spread operator
     // rule is an object with pattern and response properties
@@ -213,7 +208,7 @@ const synonyms = {
     inspired: ["motivated", "driven", "uplifted", "encouraged", "empowered"],
     lonely: ["isolated", "alone", "solitary", "abandoned", "neglected"],
     worried: ["concerned", "anxious", "troubled", "distressed", "fearful", "uneasy"]
-
+    
 };
 
 const sentimentPhrases = {
@@ -314,7 +309,6 @@ function normalizeInput(input) {
     // Return the input with synonyms replaced
     return input.replace(/\b\w+\b/g, (word) => synonymMap[word.toLowerCase()] || word);
 }
-
 
 // Apply normalization before matching
 function processInput() {
