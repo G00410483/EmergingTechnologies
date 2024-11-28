@@ -42,6 +42,24 @@ const elizaResponses = [
             return `Today's date is ${month}/${day}/${year}.`;
         }
     },
+    // Name
+    {
+        pattern: /my name is (\w+)/i,
+        response: (match) => {
+            const name = match[1];
+            updateContext('name', name); // Store the name in the context
+            return `It's a pleasure to meet you, ${name}. How has your day been so far?`;
+        }
+    },
+    {
+        pattern: /I am (\w+)/i,
+        response: (match) => {
+            const name = match[1];
+            updateContext('name', name); // Store the name in the context
+            return `Nice to meet you, ${name}. How are you feeling today?`;
+        }
+    },
+    
     { pattern: /my name is (.*)/i, response: "It's a pleasure to meet you, $1. How has your day been so far?" },
     { pattern: /I need (.*)/i, response: "What makes you feel you need $1?" },
     { pattern: /I (?:am|feel) (?:really )?(sad|unhappy|depressed|down)/i, response: "I'm sorry to hear that you're feeling $1. Would you like to talk about what's causing these feelings?" },
@@ -269,6 +287,12 @@ function getElizaResponse(input) {
                 const sentimentPrefix = getRandomResponse(sentimentPhrases[sentiment]);
                 return `${sentimentPrefix} ${response}`;
             }
+
+            if (getContext('name')) {
+                const name = getContext('name');
+                return `${getRandomResponse(sentimentPhrases[sentiment])} ${response.replace("$name", name)}`;
+            }
+            
 
             return response;
         }
