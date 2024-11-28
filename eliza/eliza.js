@@ -314,6 +314,12 @@ function detectSentiment(input) {
     return 'neutral';
 }
 
+function updateMood(newMood) {
+    // Prioritize significant changes in mood
+    if (conversationState.mood !== newMood) {
+        conversationState.mood = newMood;
+    }
+}
 
 // Consolidated synonym replacement into single regex operation using mapping object
 function normalizeInput(input) {
