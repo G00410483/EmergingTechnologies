@@ -284,18 +284,34 @@ const sentiments = {
     neutral: ['okay', 'fine', 'normal']
 };
 
-// Sentiment analysis
 function detectSentiment(input) {
-    // Sentiment analysis dictionary
-    // Words associated with positive, negative, and neutral sentiments
-    for (let [sentiment, words] of Object.entries(sentiments)) {
-        // Create a regular expression with word boundaries
+    // Handling negations
+    const negationRegex = /\b(not|never|no|can't|cannot|won't|don't|do not)\b\s*(\w+)/i;
+
+    // Positive, Negative, Neutral word arrays
+    const sentimentWords = {
+        positive: ['happy', 'joyful', 'excited', 'grateful', 'hopeful', 'content'],
+        negative: ['sad', 'angry', 'stressed', 'afraid', 'lonely', 'depressed'],
+        neutral: ['okay', 'fine', 'normal', 'neutral', 'average']
+    };
+
+    // Test negations first
+    const negationMatch = input.match(negationRegex);
+    if (negationMatch) {
+        const negatedWord = negationMatch[2].toLowerCase();
+        if (sentimentWords.positive.includes(negatedWord)) return 'negative';
+        if (sentimentWords.negative.includes(negatedWord)) return 'positive';
+    }
+
+    // Check for sentiment words
+    for (let [sentiment, words] of Object.entries(sentimentWords)) {
         const regex = new RegExp(`\\b(${words.join('|')})\\b`, 'i');
-        // Test if the input contains any sentiment words
         if (regex.test(input)) return sentiment;
     }
+
     return 'neutral';
 }
+
 
 // Consolidated synonym replacement into single regex operation using mapping object
 function normalizeInput(input) {
