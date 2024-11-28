@@ -1,129 +1,207 @@
-# TASKS 
+# 📚 Third-Order Letter Approximation & ELIZA Chatbot Project
 
-## TASK 1: Third-Order Letter Approximation Model
+Welcome to the **Third-Order Letter Approximation & ELIZA Chatbot** project! This repository encompasses tasks ranging from text analysis using trigram models to building a classic ELIZA chatbot interface. Dive in to explore the functionalities and contributions of each component.
 
-### Overview
-This project implements a third-order letter approximation model using five plain-text works from Project Gutenberg. 
-The purpose of this model is to count the occurances of every three-character sequence in the cleaned text of these books.
-The model can provide insights into frequency of specific letter sequences. 
+---
 
-### Project Gutenberg Works
-- Five English works from Project Gutenberg are selected, ensuring that they:
-  - Are in Plan Text UTF-8 format.
-  - Do not contain any special characters outside the ASCII range (only letters, spaces, and full stops are allowed).
-- Files named: file1, file2, file3, file4, file5 for easier usage.
+## 📜 Table of Contents
 
-### Function Descriptions:
-#### 1. load_and_clean_text(file_paths)
-   - Loads mutiple text files, removes unwated characters, and converts all characters to uppercase.
-   - Cleans the text by retaining only alphabetic characters, full stops, and spaces.
-   - Paramater: file_paths - A list of file paths to the Project Gunteberg text files.
-   - Returns: A cleaned string ready for trigram analysis.
+- [📚 Third-Order Letter Approximation & ELIZA Chatbot Project](#-third-order-letter-approximation--eliza-chatbot-project)
+  - [📋 Tasks Overview](#-tasks-overview)
+    - [🔍 Task 1: Third-Order Letter Approximation Model](#-task-1-third-order-letter-approximation-model)
+    - [✍️ Task 2: Third-Order Letter Approximation Generation](#️-task-2-third-order-letter-approximation-generation)
+    - [📈 Task 3: Analyze Your Model](#-task-3-analyze-your-model)
+    - [💾 Task 4: Export Model as JSON File](#-task-4-export-model-as-json-file)
+  - [🤖 ELIZA Chatbot](#-eliza-chatbot)
+    - [🔧 Project Structure](#-project-structure)
+    - [✨ Features](#-features)
+    - [🚀 Usage](#-usage)
+    - [📂 Code Overview](#-code-overview)
+  - [📁 File Structure](#-file-structure)
+  - [🔗 License](#-license)
+  - [🙌 Contributing](#-contributing)
+  - [📞 Contact](#-contact)
+
+---
+
+## 📋 Tasks Overview
+
+### 🔍 Task 1: Third-Order Letter Approximation Model
+
+#### **Overview**
+Implement a **third-order letter approximation model** that analyzes five plain-text works from Project Gutenberg. This model counts the occurrences of every three-character sequence (trigram) in the cleaned text, providing insights into the frequency of specific letter sequences.
+
+#### **Project Gutenberg Works**
+- **Selection Criteria:**
+  - Plain Text UTF-8 format.
+  - Contains only ASCII characters: letters, spaces, and full stops.
+- **File Naming:** `file1`, `file2`, `file3`, `file4`, `file5` for streamlined usage.
+
+#### **Function Descriptions**
+
+1. **`load_and_clean_text(file_paths)`**
+   - **Purpose:** Loads multiple text files, removes unwanted characters, and converts all characters to uppercase.
+   - **Parameters:**
+     - `file_paths` (List[str]): Paths to the Project Gutenberg text files.
+   - **Returns:** `str` – A cleaned string ready for trigram analysis.
+
+2. **`generate_trigrams(text)`**
+   - **Purpose:** Creates a trigram model by counting every three-character sequence in the cleaned text.
+   - **Parameters:**
+     - `text` (str): Cleaned text for trigram extraction.
+   - **Returns:** `Dict[str, int]` – Dictionary with trigrams as keys and their counts as values.
+
+3. **`display_top_trigrams(trigram_counts, n=100)`**
+   - **Purpose:** Displays the top `n` most frequent trigrams.
+   - **Parameters:**
+     - `trigram_counts` (Dict[str, int]): Trigram frequency dictionary.
+     - `n` (int, optional): Number of top trigrams to display. *(Default: 100)*
+   - **Displays:** Top `n` trigrams directly in the console.
+
+---
+
+### ✍️ Task 2: Third-Order Letter Approximation Generation
+
+#### **Overview**
+Extend the trigram model from Task 1 to generate a 10,000-character-long string. The model predicts the next character based on the frequency of trigrams, following the patterns identified in the cleaned text.
+
+#### **Function Descriptions**
+
+1. **`generate_next_char(trigram_counts, prev_two_chars)`**
+   - **Purpose:** Predicts the next character based on the previous two characters using the trigram model.
+   - **Parameters:**
+     - `trigram_counts` (Dict[str, int]): Trigram frequencies from Task 1.
+     - `prev_two_chars` (str): The preceding two characters in the current sequence.
+   - **Returns:** `str` – The predicted next character.
+
+2. **`generate_text(trigram_counts, length=10000)`**
+   - **Purpose:** Generates a lengthy string by iteratively predicting the next character.
+   - **Parameters:**
+     - `trigram_counts` (Dict[str, int]): Trigram frequency dictionary.
+     - `length` (int, optional): Desired length of the generated text. *(Default: 10,000 characters)*
+   - **Returns:** `str` – Generated text of specified length.
+
+---
+
+### 📈 Task 3: Analyze Your Model
+
+#### **Overview**
+Assess the quality of the generated text by calculating the percentage of valid English words. This analysis provides insight into the model's ability to produce coherent language sequences.
+
+#### **Function Descriptions**
+
+1. **`load_word_list(file_path)`**
+   - **Purpose:** Loads a list of valid English words from a specified file.
+   - **Parameters:**
+     - `file_path` (str): Path to `words.txt`, containing valid English words.
+   - **Returns:** `Set[str]` – Set of uppercase English words.
+
+2. **`calculate_percentage_of_real_words(generated_text, valid_words)`**
+   - **Purpose:** Calculates the percentage of valid English words in the generated text.
+   - **Parameters:**
+     - `generated_text` (str): Text generated by the trigram model.
+     - `valid_words` (Set[str]): Set of valid English words.
+   - **Returns:** `float` – Percentage of valid English words in the generated text.
+
+---
+
+### 💾 Task 4: Export Model as JSON File
+
+#### **Overview**
+Export the trigram model created in Task 1 to a JSON file. This enables future access to the model data or integration with other projects.
+
+#### **Function Description**
+
+- **`export_trigram_model_to_json(trigram_counts, filename='trigram.json')`**
+  - **Purpose:** Exports the trigram model to a JSON file.
+  - **Parameters:**
+    - `trigram_counts` (Dict[str, int]): Trigram model to export.
+    - `filename` (str, optional): Name of the JSON file. *(Default: `trigram.json`)*
+  - **Result:** Trigram model saved as a JSON file in the specified location.
+
+---
+
+## 🤖 ELIZA Chatbot
+
+### **Overview**
+A web-based **ELIZA chatbot** inspired by Joseph Weizenbaum's early natural language processing program from the 1960s. ELIZA simulates conversation by using predefined responses to keywords and patterns in user input. This project features a JavaScript-based chatbot interface that utilizes regular expressions to parse user input and respond conversationally.
+
+### 🔧 Project Structure
+
+1. **`index.html`**
+   - Defines the chatbot's HTML structure.
+2. **`eliza.js`**
+   - Contains ELIZA's response logic, input processing, and chat management functions.
+3. **`style.css`**
+   - Styles the chatbot's UI, including animations and layout.
+
+### ✨ Features
+
+- **🧠 Natural Language Processing with Regular Expressions**
+  - Uses regex patterns to match user input and select appropriate responses.
   
-#### 2. generate_tigrams(text)
-   - Generates a trigram model by counting the occurances of every three-characters sequneces in the cleaned text.
-   - Parameter: text - The cleaned string of text from which to extract trigrams.
-   - Returns: A dictionary where the keys are trigrams and the values are their respective counts.
+- **👥 User-Friendly Interface**
+  - Visually appealing chat history with timestamps and seamless interaction flow.
   
-#### 3. display_top_trigrams(trigram_counts, n = 100)
-   - Displays the top n most frequent trigrams from the trigram model.
-   - Parameters:
-     - trigram_counts - The dictionary of trigrams and their counts generated by generate_trigrams().
-     - n - The number of top trigrams to display.
-   - Displays: Displays the result directly.
+- **🔄 Reset Management**
+  - Ability to reset the chat history for a fresh conversation.
+  
+- **📱 Responsive Design**
+  - Adaptive layout for optimal experience across various devices and screen sizes.
 
-## TASK 2: Third-order letter approximation generation
+### 🚀 Usage
 
-### Overview:
-This task extends trigram model from Task 1 by generating string based on the frequency of trigrams generated from the cleaned text. In task 2, the goal is to predict the next character in sequence and to generate 10,000 character long string that follows the patterns. 
+1. **Open the Chat Interface**
+   - Type a message in the input box at the bottom of the chat window and press Enter or click the send button to start chatting.
+   
+2. **Interact with ELIZA**
+   - ELIZA analyzes your input, matches it against known patterns, and responds accordingly.
+   
+3. **Reset Chat**
+   - Click the reset button in the header to clear the chat history and begin anew.
 
-### Function Descriptions:
-#### 1. generate_next_char(trigram_counts, prev_two_chars)
-   - This function predicts the next character based on the previous two characters by looking up trigrams that start with those two characters and randomly choosing the third character weighted by their frequency in the model.
-   - Parameters:
-     - trigram_counts (dict): The dictionary of trigrams and their frequencies, generated in Task 1.
-     - prev_two_chars (str): A two-character string that represents the previous two characters in the current sequence.
-   - Returns: The predicted next character based on the trigram model.
-     
-#### 2. generate_text(trigram_counts, length=10000)
-   - This function generates a long string of text by repeatedly predicting the next character based on the previous two characters, starting with 'TH'.
-   - Parameters:
-     - trigram_counts (dict): The trigram frequency dictionary from Task 1.
-     - length (int, optional): The desired length of the generated text (default is 10,000 characters).
-   - Returns: A generated string of the specified length.
+### 📂 Code Overview
 
-## TASK 3: Analyze Your Model
+#### **`eliza.js`**
 
-### Overview
-The purpose of this task is to assess the quality of the generated text by calculating the percentage of valid English words within it, giving insight into model's ability to produce coherent language sequences. In Task 3, the generated text from the trigram-based third order approximation model is analzyed to determine the percentage of valid English words. 
+- **Response Patterns**
+  - `elizaResponses` array contains objects with `pattern` and `response` properties.
+  
+- **`getElizaResponse()` Function**
+  - Iterates through `elizaResponses` to find a pattern match for the user input and returns a formatted response.
+  
+- **`processInput()` Function**
+  - Manages user input, clears the input field, and displays ELIZA's response.
+  
+- **`addMessage()` Function**
+  - Adds messages to the chat window with timestamps and scrolls to the latest message.
+  
+- **`resetChat()` Function**
+  - Clears the chat history for a new conversation.
 
-### Function Descriptions:
-#### 1. load_word_list(file_path)
-  - This function loads a list of valid English words from the file specified by file_path. The words are converted to uppercase to match the case of generated text.
-  - Parameters: file_path (str): Path to words.txt, the file containg valid English words.
-  - Returns: A set of words, all in uppercase.
-    
-#### 2. calculate_percentage_of_real_words(generated_text, valid_words)
-  - This function calculates the percentage of valid English words within the generated text by checking each word against the loaded list of valid words.
-  - Parameters:
-      - generated_text (str): The generated text by trigram model.
-      - valid_words (set): A set of valid English words loaded from words.txt.
-  - Returns: A float representing the percetage of valid English words in the generated text. 
+#### **`style.css`**
 
-## TASK 4: Export Model as JSON File
+- **Chat Container**
+  - Center-aligned with a gradient background and glass effect.
+  
+- **Messages Styling**
+  - Distinct styles for user and bot messages, featuring speech bubble shapes, animations, and timestamps.
+  
+- **Input Area**
+  - Rounded input field with a custom send button for enhanced aesthetics.
 
-### Overview
-This task exports the trigram model created in Task1 to JSON file. This allows model data to be accessed later or integrated with other projects.
+#### **`index.html`**
 
-### Function Description
-#### export_trigram_model_to_json(trigram_counts, filename='trigram.json'
-  - Exports trigram model to a JSON file.
-  - Parameters:
-      - trigram_counts (dict)- Trigram model to be exported.
-      - file_name (str)- The name of the JSON file to save the model.
-  - Result- trigram model is saved to a JSON file in the specified location.
+- **Header**
+  - Displays the chatbot title and reset button.
+  
+- **Chat Box**
+  - Contains chat messages with `user` and `bot` classes for styling.
+  
+- **Input Field**
+  - Text input for user messages and a send button to trigger responses.
 
-# ELIZA CHATBOT
+---
 
-### Overview
-This project is web-based ELIZA chatbot, inspired by the earrly natural language processing program developed by Jospeh Weizenbaum in the 1960s. ELIZA simulates conversation with user, using a series of predefined responses to keywords and patterns in the input text. This project uses a JavaScript chat bot interface that uses regular expressions to parse user input and respond in conversational manner. 
+## 📁 File Structure
 
-### Project Structure
-1. index.html: The HTML structure of the chatbot interface.
-2. eliza.js: The JavaScript file containing ELIZA's response logic, input processing, and chat management functions.
-3. style.css: The CSS file for styling the chatbot's UI, including animations and layout.
-
-### Features
-1. Natural Language Processing with Regular Expressions
-  - The chatbox uses regular expressions to match patterns in user input and select appropriate responses.
-2. User-friendly interface
-  - A visually appealing interface with a chat history. timestamps, and seamless interaction flow.
-3. Reset Management
-  - Users can reset the chat history.
-4. Responsive Design
-  - The layout is adaptive to different screen sizes, providing an optiaml experience acorss devices.
-
-### Usage
-1. Open the CHat Interface: Typee a message in the input box at the bottom of the chat windows and press Enter or click the send button to start chatting.
-2. ELIZA's Responses: ELIZA will analyze your inoput, matich it against known patters, and respond accordingly.
-3. Reset Chat: Click the reset button in the header to clear the chat history and start fresh.
-
-### Code Overview
-#### eliza.js
-- Response Patterns: The elizaResponses array holds objects with pattern and response properties.
-- getElizaResponse() Function: Loops through elizaResponses to find a pattern match for the user input and returns a formatted response.
-- processingInput() Function: Manages the user input, clears the input field, and displays ELIZA's response.
-- addMessage() Function: Adds messages to the chat window, includes timestamps, and scrolls to the bottom.
-- resetChat() Function: Clears the chat history.
-
-#### style.css
-The CSS file styles the chatbot interface, adding visual appeal and readability:
-- Chat Container: A center-aligned, gradient-background chat container with glass effect.
-- Messages Styling: Separate styles for user and bot messages, with speech bubble shapes, animations, and timestamps.
-- Input Area: Styled with round input field and a custom send button.
-
-## index.html
-The HTML file defines the chatbot's structure:
-- Header: Displays the chatbot title and reset button.
-- Chat Box: Containes chat messages with user and bot classes forstyling.
-- Input Field: A text input for user messages, and a send button to trigger responses.
