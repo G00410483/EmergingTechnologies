@@ -218,9 +218,17 @@ function getElizaResponse(input) {
         if (match) {
             const sentiment = detectSentiment(input);
             conversationState.mood = sentiment; // Update mood in conversationState
-            const sentimentPrefix = sentimentPhrases[sentiment][Math.floor(Math.random() * sentimentPhrases[sentiment].length)];
+
+            // Base response
             const baseResponse = getRandomResponse(rule.response).replace("$1", capture || '');
-            return sentimentPrefix + " " + baseResponse;
+
+            // Only apply sentiment prefix to relevant responses
+            if (sentiment !== 'neutral' && !rule.pattern.test("\\bhello\\b|hi|hey|greetings")) {
+                const sentimentPrefix = sentimentPhrases[sentiment][Math.floor(Math.random() * sentimentPhrases[sentiment].length)];
+                return sentimentPrefix + " " + baseResponse;
+            }
+
+            return baseResponse;
         }
     }
     return "I'm here to listen. Please, go on.";
