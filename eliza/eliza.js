@@ -4,7 +4,14 @@
 // Responses are mapped to patterns
 // Rules are matched in order
 const elizaResponses = [
-    { pattern: /\bhello\b|hi|hey|greetings|good\s+(morning|afternoon|evening)/i, response: "Hello! How are you feeling today?" },
+    { 
+        pattern: /\bhello\b|hi|hey|greetings/i, 
+        response: [
+            "Hello! How are you feeling today?",
+            "Hi there! What's on your mind?",
+            "Hey! How can I assist you?"
+        ]
+    },
     { pattern: /my name is (.*)/i, response: "It's a pleasure to meet you, $1. How has your day been so far?" },
     { pattern: /I need (.*)/i, response: "What makes you feel you need $1?" },
     { pattern: /I (?:am|feel) (?:really )?(sad|unhappy|depressed|down)/i, response: "I'm sorry to hear that you're feeling $1. Would you like to talk about what's causing these feelings?" },
@@ -193,23 +200,24 @@ function matchPattern(input, rule) {
     return match ? { match: true, capture: match[1] || null } : { match: false };
 }
 
+function getRandomResponse(responses) {
+    if (Array.isArray(responses)) {
+        return responses[Math.floor(Math.random() * responses.length)];
+    }
+    return responses;
+}
+
 // Function to get ELIZA's response based on user input
-// Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match
 function getElizaResponse(input) {
-    // Loop through each rule in the elizaResponses array
     for (let rule of elizaResponses) {
-        // Call the matchPattern function to check if the input matches the rule
         const { match, capture } = matchPattern(input, rule);
-        // If the input matches the rule
         if (match) {
             conversationState.lastTopic = capture;
-            // Return the response with the capture group
-            return rule.response.replace("$1", capture || '');
+            return getRandomResponse(rule.response).replace("$1", capture || '');
         }
     }
     return "I'm here to listen. Please, go on.";
 }
-
 // Synonyms for normalization
 // Used for normalizing user input before matching
 const sentiments = {
