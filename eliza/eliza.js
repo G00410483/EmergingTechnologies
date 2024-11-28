@@ -203,6 +203,12 @@ const synonyms = {
 
 };
 
+const sentiments = {
+    positive: ['happy', 'joyful', 'excited'],
+    negative: ['sad', 'angry', 'stressed'],
+    neutral: ['okay', 'fine', 'normal']
+};
+
 const sentimentPhrases = {
     positive: ["That's great to hear!", "Wonderful!", "I'm glad you're feeling that way!"],
     negative: ["I'm sorry you're feeling that way.", "That sounds tough.", "I'm here for you."],
@@ -269,14 +275,6 @@ function getElizaResponse(input) {
     }
     return "I'm here to listen. Please, go on.";
 }
-
-// Synonyms for normalization
-// Used for normalizing user input before matching
-const sentiments = {
-    positive: ['happy', 'joyful', 'excited'],
-    negative: ['sad', 'angry', 'stressed'],
-    neutral: ['okay', 'fine', 'normal']
-};
 
 function detectSentiment(input) {
     // Handling negations
