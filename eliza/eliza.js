@@ -257,25 +257,27 @@ function getRandomResponse(responses) {
 // Function to get ELIZA's response based on user input
 function getElizaResponse(input) {
     for (let rule of elizaResponses) {
-        const { match, capture } = matchPattern(input, rule);
+        const { match, response } = matchPattern(input, rule);
         if (match) {
             const sentiment = detectSentiment(input);
-            conversationState.mood = sentiment; // Update mood in conversationState
 
-            // Base response
-            const baseResponse = getRandomResponse(rule.response).replace("$1", capture || '');
-
-            // Only apply sentiment prefix to relevant responses
-            if (sentiment !== 'neutral' && !rule.pattern.test("\\bhello\\b|hi|hey|greetings")) {
-                const sentimentPrefix = sentimentPhrases[sentiment][Math.floor(Math.random() * sentimentPhrases[sentiment].length)];
-                return sentimentPrefix + " " + baseResponse;
+            // Avoid sentiment prefix for greetings
+            if (rule.pattern.test(/hello|hi|greetings/i)) {
+                return response;
             }
 
-            return baseResponse;
+            // Add sentiment-based prefix if relevant
+            if (sentiment !== 'neutral') {
+                const sentimentPrefix = getRandomResponse(sentimentPhrases[sentiment]);
+                return `${sentimentPrefix} ${response}`;
+            }
+
+            return response;
         }
     }
     return "I'm here to listen. Please, go on.";
 }
+
 // Synonyms for normalization
 // Used for normalizing user input before matching
 const sentiments = {
