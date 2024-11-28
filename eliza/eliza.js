@@ -172,7 +172,11 @@ const synonyms = {
     worried: ["concerned", "anxious", "troubled", "distressed", "fearful", "uneasy"]
 };
 
-
+const sentimentPhrases = {
+    positive: ["That's great to hear!", "Wonderful!", "I'm glad you're feeling that way!"],
+    negative: ["I'm sorry you're feeling that way.", "That sounds tough.", "I'm here for you."],
+    neutral: ["I see.", "Okay.", "Tell me more."]
+};
 
 // Conversation state
 let conversationState = {
@@ -212,8 +216,11 @@ function getElizaResponse(input) {
     for (let rule of elizaResponses) {
         const { match, capture } = matchPattern(input, rule);
         if (match) {
-            conversationState.lastTopic = capture;
-            return getRandomResponse(rule.response).replace("$1", capture || '');
+            const sentiment = detectSentiment(input);
+            conversationState.mood = sentiment; // Update mood in conversationState
+            const sentimentPrefix = sentimentPhrases[sentiment][Math.floor(Math.random() * sentimentPhrases[sentiment].length)];
+            const baseResponse = getRandomResponse(rule.response).replace("$1", capture || '');
+            return sentimentPrefix + " " + baseResponse;
         }
     }
     return "I'm here to listen. Please, go on.";
