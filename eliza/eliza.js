@@ -4,13 +4,55 @@
 // Responses are mapped to patterns
 // Rules are matched in order
 const elizaResponses = [
-    { 
-        pattern: /\bhello\b|hi|hey|greetings/i, 
+    // Greeting patterns
+    {
+        pattern: /\bhello\b|hi|hey|greetings/i,
         response: [
             "Hello! How are you feeling today?",
             "Hi there! What's on your mind?",
             "Hey! How can I assist you?"
         ]
+    },
+    // Date, Time, Day patterns
+    {
+        pattern: /\b(what day is it|today's day|current day)\b/i,
+        response: () => {
+            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const today = new Date().getDay();
+            return `Today is ${days[today]}.`;
+        }
+    },
+    {
+        pattern: /\b(what time is it|current time|time now)\b/i,
+        response: () => {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const formattedTime = `${hours % 12 || 12}:${minutes < 10 ? '0' + minutes : minutes} ${hours >= 12 ? 'PM' : 'AM'}`;
+            return `The current time is ${formattedTime}.`;
+        }
+    },
+    {
+        pattern: /\b(what is the date|today's date|current date)\b/i,
+        response: () => {
+            const now = new Date();
+            const month = now.getMonth() + 1; // Months are zero-indexed
+            const day = now.getDate();
+            const year = now.getFullYear();
+            return `Today's date is ${month}/${day}/${year}.`;
+        }
+    },
+    {
+        pattern: /\b(tell me about (monday|tuesday|wednesday|thursday|friday|saturday|sunday))\b/i,
+        response: (match) => {
+            const day = match[2].charAt(0).toUpperCase() + match[2].slice(1);
+            return `Ah, ${day}! What would you like to discuss about ${day}?`;
+        }
+    },
+    // Clarify "What is it?"
+    {
+        pattern: /\b(what is it)\b/i,
+        response: "Could you clarify what you mean by 'it'? I'm here to help."
     },
     { pattern: /my name is (.*)/i, response: "It's a pleasure to meet you, $1. How has your day been so far?" },
     { pattern: /I need (.*)/i, response: "What makes you feel you need $1?" },
@@ -135,7 +177,8 @@ const elizaResponses = [
     { pattern: /I am excited about the future/i, response: "Optimism is great! What are you looking forward to?" },
     { pattern: /I want to learn (.*)/i, response: "Learning new things is enriching. How will you start with $1?" },
     { pattern: /I feel empowered/i, response: "That's fantastic! What's contributing to your sense of empowerment?" },
-    { pattern: /.*/, response: "Please, tell me more about that." }
+    { pattern: /.*/, response: "Please, tell me more about that." },
+
 ].map(rule => ({
     // ... is the spread operator
     // rule is an object with pattern and response properties
@@ -170,6 +213,7 @@ const synonyms = {
     inspired: ["motivated", "driven", "uplifted", "encouraged", "empowered"],
     lonely: ["isolated", "alone", "solitary", "abandoned", "neglected"],
     worried: ["concerned", "anxious", "troubled", "distressed", "fearful", "uneasy"]
+
 };
 
 const sentimentPhrases = {
@@ -198,10 +242,14 @@ function getContext(key) {
 
 // Function to match a pattern in the input
 function matchPattern(input, rule) {
-    // match() method searches a string for a match against a regular expression
     const match = input.match(rule.pattern);
-    // Return an object with match and capture properties
-    return match ? { match: true, capture: match[1] || null } : { match: false };
+    if (match) {
+        if (typeof rule.response === 'function') {
+            return { match: true, response: rule.response(match) };
+        }
+        return { match: true, response: getRandomResponse(rule.response).replace("$1", match[1] || '') };
+    }
+    return { match: false };
 }
 
 function getRandomResponse(responses) {
