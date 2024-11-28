@@ -313,18 +313,60 @@ function updateMood(newMood) {
     }
 }
 
-// Consolidated synonym replacement into single regex operation using mapping object
+// Extend normalizeInput function for handling contractions
 function normalizeInput(input) {
-    // Create a synonym map object
+    // Create a contraction map for expansion
+    const contractionMap = {
+        "i'm": "i am",
+        "you're": "you are",
+        "he's": "he is",
+        "she's": "she is",
+        "it's": "it is",
+        "we're": "we are",
+        "they're": "they are",
+        "i've": "i have",
+        "you've": "you have",
+        "we've": "we have",
+        "they've": "they have",
+        "i'd": "i would",
+        "you'd": "you would",
+        "he'd": "he would",
+        "she'd": "she would",
+        "we'd": "we would",
+        "they'd": "they would",
+        "i'll": "i will",
+        "you'll": "you will",
+        "he'll": "he will",
+        "she'll": "she will",
+        "we'll": "we will",
+        "they'll": "they will",
+        "can't": "cannot",
+        "won't": "will not",
+        "don't": "do not",
+        "didn't": "did not",
+        "isn't": "is not",
+        "aren't": "are not",
+        "wasn't": "was not",
+        "weren't": "were not",
+        "shouldn't": "should not",
+        "wouldn't": "would not",
+        "couldn't": "could not",
+        "mightn't": "might not",
+        "mustn't": "must not"
+    };
+
+    // Replace contractions with their expanded forms
+    input = input.replace(/\b\w+'\w*\b/g, (match) => contractionMap[match.toLowerCase()] || match);
+
+    // Create a synonym map object for other replacements
     const synonymMap = Object.entries(synonyms)
-        // Map each synonym to its canonical form
         .flatMap(([canonical, syns]) => syns.map(syn => ({ [syn]: canonical })))
-        // Merge all objects into a single object
         .reduce((acc, cur) => ({ ...acc, ...cur }), {});
 
-    // Return the input with synonyms replaced
+    // Replace synonyms with their canonical forms
     return input.replace(/\b\w+\b/g, (word) => synonymMap[word.toLowerCase()] || word);
 }
+
 
 // Apply normalization before matching
 function processInput() {
