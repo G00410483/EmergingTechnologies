@@ -172,8 +172,18 @@ let conversationState = {
     // Last topic of conversation
     lastTopic: null,
     // User's mood
-    mood: null
+    mood: null,
+    // Context
+    context: {}
 };
+
+function updateContext(key, value) {
+    conversationState.context[key] = value;
+}
+
+function getContext(key) {
+    return conversationState.context[key] || null;
+}
 
 // Function to match a pattern in the input
 function matchPattern(input, rule) {
