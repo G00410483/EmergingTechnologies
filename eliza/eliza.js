@@ -272,29 +272,29 @@ function normalizeInput(input) {
 function processInput() {
     // Get the user input field
     const userInputField = document.getElementById('user-input');
-    // Normalize the user input
-    const userText = normalizeInput(userInputField.value.trim());
+    const userTextOriginal = userInputField.value.trim(); // Keep original input for display
+
+    // Normalize the user input for matching purposes
+    const userTextNormalized = normalizeInput(userTextOriginal);
 
     // If the user input is empty, return
-    if (userText === '') return;
-    // Add the user message to the chat box
-    addMessage(userText, 'user');
+    if (userTextOriginal === '') return;
+
+    // Add the original user message to the chat box
+    addMessage(userTextOriginal, 'user');
+
     // Clear the user input field
     userInputField.value = '';
-    // Focus on the user input field
     userInputField.focus();
 
-    // Get the sentiment of the user input
-    const sentiment = detectSentiment(userText);
+    // Get the sentiment of the normalized input
+    const sentiment = detectSentiment(userTextNormalized);
 
     // Show the typing indicator
     showTypingIndicator();
 
-    // Get the ELIZA response
-    const elizaResponse = getElizaResponse(userText);
-
-    const enhancedResponse = sentiment === 'negative' ?
-        "I'm here for you. " + elizaResponse : elizaResponse;
+    // Get the ELIZA response based on the normalized input
+    const elizaResponse = getElizaResponse(userTextNormalized);
 
     setTimeout(() => {
         removeTypingIndicator();
