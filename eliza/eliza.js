@@ -1,3 +1,5 @@
+// Array of response for the chatbot
+// Each response has a pattern and a corresponding response
 const elizaResponses = [
     {
         pattern: /\bhello\b|hi|hey|greetings/i,
@@ -57,16 +59,21 @@ const elizaResponses = [
     {
         pattern: /\bI am (\w+)\b/i,
         response: (match) => {
-            const nameOrEmotion = match[1];
+            const stateOrName = match[1].toLowerCase();
+            const positiveStates = ['good', 'fine', 'okay', 'well'];
             const emotions = ['happy', 'sad', 'angry', 'tired', 'excited'];
-            if (emotions.includes(nameOrEmotion.toLowerCase())) {
-                return `It's okay to feel ${nameOrEmotion}. Would you like to share more about it?`;
+    
+            if (positiveStates.includes(stateOrName)) {
+                return `I'm glad to hear you're feeling ${stateOrName}. Is there anything you'd like to talk about?`;
+            } else if (emotions.includes(stateOrName)) {
+                return `It's okay to feel ${stateOrName}. Would you like to share more about it?`;
             } else {
-                return `Nice to meet you, ${nameOrEmotion}. How are you feeling today?`;
+                return `Nice to meet you, ${stateOrName}. How are you feeling today?`;
             }
         }
-    }
+    },
     
+
     { pattern: /I (?:am|feel) (sad|unhappy|depressed|down)/i, response: "I'm sorry to hear that. Would you like to talk about what's making you feel this way?" },
     { pattern: /I (?:am|feel) (happy|content|joyful|excited)/i, response: "That's wonderful! What's contributing to your positive feelings?" },
     { pattern: /I'm stressed|I feel stressed|stressful/i, response: "Stress can be overwhelming. What's contributing to your stress?" },
