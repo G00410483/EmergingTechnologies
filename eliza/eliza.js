@@ -42,24 +42,29 @@ const elizaResponses = [
             return `Today's date is ${month}/${day}/${year}.`;
         }
     },
-    // Name
+    // Name Handling
     {
         pattern: /my name is (\w+)/i,
         response: (match) => {
             const name = match[1];
-            updateContext('name', name); // Store the name in the context
+            updateContext('name', name);
             return `It's a pleasure to meet you, ${name}. How has your day been so far?`;
         }
     },
     {
         pattern: /I am (\w+)/i,
         response: (match) => {
-            const name = match[1];
-            updateContext('name', name); // Store the name in the context
-            return `Nice to meet you, ${name}. How are you feeling today?`;
+            const nameOrEmotion = match[1];
+            const emotions = ['happy', 'sad', 'angry', 'tired', 'excited']; // List of common emotions
+            if (emotions.includes(nameOrEmotion.toLowerCase())) {
+                return `It's okay to feel ${nameOrEmotion}. Would you like to share more about it?`;
+            } else {
+                updateContext('name', nameOrEmotion);
+                return `Nice to meet you, ${nameOrEmotion}. How are you feeling today?`;
+            }
         }
     },
-    
+
     { pattern: /I need (.*)/i, response: "What makes you feel you need $1?" },
     { pattern: /I (?:am|feel) (?:really )?(sad|unhappy|depressed|down)/i, response: "I'm sorry to hear that you're feeling $1. Would you like to talk about what's causing these feelings?" },
     { pattern: /I'm stressed|I feel stressed|stressful/i, response: "Stress can be overwhelming. What's contributing to your stress lately?" },
@@ -234,11 +239,6 @@ const sentimentPhrases = {
 
 // Conversation state
 let conversationState = {
-    // Last topic of conversation
-    lastTopic: null,
-    // User's mood
-    mood: null,
-    // Context
     context: {}
 };
 
@@ -291,7 +291,7 @@ function getElizaResponse(input) {
                 const name = getContext('name');
                 return `${getRandomResponse(sentimentPhrases[sentiment])} ${response.replace("$name", name)}`;
             }
-            
+
 
             return response;
         }
@@ -299,34 +299,17 @@ function getElizaResponse(input) {
     return "I'm here to listen. Please, go on.";
 }
 
+// Sentiment Detection
 function detectSentiment(input) {
-    // Handling negations
-    const negationRegex = /\b(not|never|no|can't|cannot|won't|don't|do not)\b\s*(\w+)/i;
+    const positiveWords = ["happy", "joyful", "excited"];
+    const negativeWords = ["sad", "angry", "depressed"];
+    const neutralWords = ["okay", "fine", "normal"];
 
-    // Positive, Negative, Neutral word arrays
-    const sentimentWords = {
-        positive: ['happy', 'joyful', 'excited', 'grateful', 'hopeful', 'content'],
-        negative: ['sad', 'angry', 'stressed', 'afraid', 'lonely', 'depressed'],
-        neutral: ['okay', 'fine', 'normal', 'neutral', 'average']
-    };
-
-    // Test negations first
-    const negationMatch = input.match(negationRegex);
-    if (negationMatch) {
-        const negatedWord = negationMatch[2].toLowerCase();
-        if (sentimentWords.positive.includes(negatedWord)) return 'negative';
-        if (sentimentWords.negative.includes(negatedWord)) return 'positive';
-    }
-
-    // Check for sentiment words
-    for (let [sentiment, words] of Object.entries(sentimentWords)) {
-        const regex = new RegExp(`\\b(${words.join('|')})\\b`, 'i');
-        if (regex.test(input)) return sentiment;
-    }
-
+    const words = input.toLowerCase().split(/\s+/);
+    if (words.some(word => positiveWords.includes(word))) return 'positive';
+    if (words.some(word => negativeWords.includes(word))) return 'negative';
     return 'neutral';
 }
-
 
 // Extend normalizeInput function for handling contractions
 function normalizeInput(input) {
