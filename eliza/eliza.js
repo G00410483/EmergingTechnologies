@@ -327,12 +327,6 @@ function detectSentiment(input) {
     return 'neutral';
 }
 
-function updateMood(newMood) {
-    // Prioritize significant changes in mood
-    if (conversationState.mood !== newMood) {
-        conversationState.mood = newMood;
-    }
-}
 
 // Extend normalizeInput function for handling contractions
 function normalizeInput(input) {
