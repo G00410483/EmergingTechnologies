@@ -156,15 +156,23 @@ const sentimentPhrases = {
 
 // Sentiment Detection
 function detectSentiment(input) {
-    const positiveWords = ["happy", "joyful", "excited"];
-    const negativeWords = ["sad", "angry", "depressed"];
+    const positiveWords = ["happy", "joyful", "excited", "great", "good"];
+    const negativeWords = ["sad", "angry", "depressed", "bad", "terrible"];
     const neutralWords = ["okay", "fine", "normal"];
 
+    let score = 0;
     const words = input.toLowerCase().split(/\s+/);
-    if (words.some(word => positiveWords.includes(word))) return 'positive';
-    if (words.some(word => negativeWords.includes(word))) return 'negative';
+
+    words.forEach(word => {
+        if (positiveWords.includes(word)) score++;
+        if (negativeWords.includes(word)) score--;
+    });
+
+    if (score > 0) return 'positive';
+    if (score < 0) return 'negative';
     return 'neutral';
 }
+
 
 // Extend normalizeInput function for handling contractions
 function normalizeInput(input) {
