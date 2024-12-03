@@ -72,6 +72,27 @@ const elizaResponses = [
             }
         }
     },
+
+    {
+        pattern: /\bhow are you\b/i,
+        response: [
+            "I'm just a program, but I'm here to help you!",
+            "I'm doing well, thank you for asking. How about you?",
+            "I'm always ready to chat with you!"
+        ]
+    },
+    {
+        pattern: /\bthank you|thanks\b/i,
+        response: [
+            "You're welcome! Is there anything else on your mind?",
+            "No problem at all! I'm here for you.",
+            "Glad I could help! Let me know if you have more to share."
+        ]
+    },
+    {
+        pattern: /\bdo you understand\b/i,
+        response: "I try my best to understand. Can you tell me more so I can help better?"
+    },
     
 
     { pattern: /I (?:am|feel) (sad|unhappy|depressed|down)/i, response: "I'm sorry to hear that. Would you like to talk about what's making you feel this way?" },
@@ -132,68 +153,6 @@ const sentimentPhrases = {
     negative: ["I'm sorry you're feeling that way.", "That sounds tough.", "I'm here for you."],
     neutral: ["I see.", "Okay.", "Tell me more."]
 };
-
-// Conversation state
-let conversationState = {
-    context: {}
-};
-
-function updateContext(key, value) {
-    conversationState.context[key] = value;
-}
-
-function getContext(key) {
-    return conversationState.context[key] || null;
-}
-
-// Function to match a pattern in the input
-function matchPattern(input, rule) {
-    const match = input.match(rule.pattern);
-    if (match) {
-        if (typeof rule.response === 'function') {
-            return { match: true, response: rule.response(match) };
-        }
-        return { match: true, response: getRandomResponse(rule.response).replace("$1", match[1] || '') };
-    }
-    return { match: false };
-}
-
-function getRandomResponse(responses) {
-    if (Array.isArray(responses)) {
-        return responses[Math.floor(Math.random() * responses.length)];
-    }
-    return responses;
-}
-
-// Function to get ELIZA's response based on user input
-function getElizaResponse(input) {
-    for (let rule of elizaResponses) {
-        const { match, response } = matchPattern(input, rule);
-        if (match) {
-            const sentiment = detectSentiment(input);
-
-            // Avoid sentiment prefix for greetings
-            if (rule.pattern.test(/hello|hi|greetings/i)) {
-                return response;
-            }
-
-            // Add sentiment-based prefix if relevant
-            if (sentiment !== 'neutral') {
-                const sentimentPrefix = getRandomResponse(sentimentPhrases[sentiment]);
-                return `${sentimentPrefix} ${response}`;
-            }
-
-            if (getContext('name')) {
-                const name = getContext('name');
-                return `${getRandomResponse(sentimentPhrases[sentiment])} ${response.replace("$name", name)}`;
-            }
-
-
-            return response;
-        }
-    }
-    return "I'm here to listen. Please, go on.";
-}
 
 // Sentiment Detection
 function detectSentiment(input) {
@@ -259,6 +218,68 @@ function normalizeInput(input) {
 
     // Replace synonyms with their canonical forms
     return input.replace(/\b\w+\b/g, (word) => synonymMap[word.toLowerCase()] || word);
+}
+
+// Conversation state
+let conversationState = {
+    context: {}
+};
+
+function updateContext(key, value) {
+    conversationState.context[key] = value;
+}
+
+function getContext(key) {
+    return conversationState.context[key] || null;
+}
+
+// Function to match a pattern in the input
+function matchPattern(input, rule) {
+    const match = input.match(rule.pattern);
+    if (match) {
+        if (typeof rule.response === 'function') {
+            return { match: true, response: rule.response(match) };
+        }
+        return { match: true, response: getRandomResponse(rule.response).replace("$1", match[1] || '') };
+    }
+    return { match: false };
+}
+
+function getRandomResponse(responses) {
+    if (Array.isArray(responses)) {
+        return responses[Math.floor(Math.random() * responses.length)];
+    }
+    return responses;
+}
+
+// Function to get ELIZA's response based on user input
+function getElizaResponse(input) {
+    for (let rule of elizaResponses) {
+        const { match, response } = matchPattern(input, rule);
+        if (match) {
+            const sentiment = detectSentiment(input);
+
+            // Avoid sentiment prefix for greetings
+            if (rule.pattern.test(/hello|hi|greetings/i)) {
+                return response;
+            }
+
+            // Add sentiment-based prefix if relevant
+            if (sentiment !== 'neutral') {
+                const sentimentPrefix = getRandomResponse(sentimentPhrases[sentiment]);
+                return `${sentimentPrefix} ${response}`;
+            }
+
+            if (getContext('name')) {
+                const name = getContext('name');
+                return `${getRandomResponse(sentimentPhrases[sentiment])} ${response.replace("$name", name)}`;
+            }
+
+
+            return response;
+        }
+    }
+    return "I'm here to listen. Please, go on.";
 }
 
 
