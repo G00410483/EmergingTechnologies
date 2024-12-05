@@ -121,7 +121,7 @@ Export the trigram model created in Task 1 to a JSON file. This enables future a
 
 ---
 
-## 🤖 ELIZA Chatbot
+# 🤖 ELIZA Chatbot
 
 ### **Overview**
 A web-based **ELIZA chatbot** inspired by Joseph Weizenbaum's early natural language processing program from the 1960s. ELIZA simulates conversation by using predefined responses to keywords and patterns in user input. This project features a JavaScript-based chatbot interface that utilizes regular expressions to parse user input and respond conversationally.
