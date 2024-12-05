@@ -228,9 +228,14 @@ function normalizeInput(input) {
     return input.replace(/\b\w+\b/g, (word) => synonymMap[word.toLowerCase()] || word);
 }
 
-// Conversation state
+// Define the chatbot's conversation state to store user-specific details
 let conversationState = {
-    context: {}
+    context: {
+        name: null, // Stores the user's name (default is null if not provided)
+        lastEmotion: null, // Tracks the last emotion mentioned by the user
+        sentimentHistory: [], // Keeps a history of detected sentiments (positive, negative, neutral)
+        previousTopics: [] // Stores previous topics discussed by the user
+    }
 };
 
 function updateContext(key, value) {
