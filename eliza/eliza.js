@@ -1,5 +1,6 @@
 // Array of response for the chatbot
 // Each response has a pattern and a corresponding response
+// Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
 const elizaResponses = [
     {
         pattern: /\bhello\b|hi|hey|greetings/i,
@@ -9,6 +10,8 @@ const elizaResponses = [
             "Hey! How can I assist you?"
         ]
     },
+
+    // Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
     {
         pattern: /\b(what day is it|today's day|current day)\b/i,
         response: () => {
@@ -112,6 +115,7 @@ const elizaResponses = [
     { pattern: /.*/, response: "Please, tell me more about that." },
 ].map(rule => ({
     ...rule,
+    // Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
     pattern: new RegExp(rule.pattern.source, rule.pattern.flags) // Precompile regex
 }));
 
@@ -177,6 +181,7 @@ function detectSentiment(input) {
 }
 
 // Extend normalizeInput function for handling contractions
+// Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace
 function normalizeInput(input) {
     // Create a contraction map for expansion
     const contractionMap = {
