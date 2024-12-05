@@ -154,25 +154,27 @@ const sentimentPhrases = {
     neutral: ["I see.", "Okay.", "Tell me more."]
 };
 
-// Sentiment Detection
+// Function to detect the sentiment of user input
 function detectSentiment(input) {
+    // Define words associated with positive, negative, and neutral sentiments
     const positiveWords = ["happy", "joyful", "excited", "great", "good"];
     const negativeWords = ["sad", "angry", "depressed", "bad", "terrible"];
     const neutralWords = ["okay", "fine", "normal"];
 
-    let score = 0;
-    const words = input.toLowerCase().split(/\s+/);
+    let score = 0; // Initialize a score for sentiment analysis
+    const words = input.toLowerCase().split(/\s+/); // Split the input into individual words
 
+    // Iterate over the words and adjust the sentiment score
     words.forEach(word => {
-        if (positiveWords.includes(word)) score++;
-        if (negativeWords.includes(word)) score--;
+        if (positiveWords.includes(word)) score++; // Increment score for positive words
+        if (negativeWords.includes(word)) score--; // Decrement score for negative words
     });
 
-    if (score > 0) return 'positive';
-    if (score < 0) return 'negative';
-    return 'neutral';
+    // Determine the sentiment based on the score
+    const sentiment = score > 0 ? 'positive' : score < 0 ? 'negative' : 'neutral';
+    conversationState.context.sentimentHistory.push(sentiment); // Update the sentiment history in context
+    return sentiment; // Return the detected sentiment
 }
-
 
 // Extend normalizeInput function for handling contractions
 function normalizeInput(input) {
@@ -243,60 +245,72 @@ function updateContext(key, value) {
     conversationState.context[key] = value; // Adds or updates the key with the new value
 }
 
-
 // Function to retrieve a value from the context
 function getContext(key) {
     return conversationState.context[key] || null; // Returns the value for the key, or null if it doesn't exist
 }
-// Function to match a pattern in the input
+
+// Function to match user input against a specific rule
 function matchPattern(input, rule) {
-    const match = input.match(rule.pattern);
-    if (match) {
+    const match = input.match(rule.pattern); // Tests the input against the pattern in the rule
+    if (match) { // If there's a match
         if (typeof rule.response === 'function') {
+            // If the response is a function, call it with the match details
             return { match: true, response: rule.response(match) };
         }
-        return { match: true, response: getRandomResponse(rule.response).replace("$1", match[1] || '') };
+        // Otherwise, return a random response from the response array
+        return { match: true, response: getRandomResponse(rule.response) };
     }
-    return { match: false };
+    return { match: false }; // If no match, return false
 }
 
+// Function to select a random response from an array
 function getRandomResponse(responses) {
-    if (Array.isArray(responses)) {
-        return responses[Math.floor(Math.random() * responses.length)];
+    if (Array.isArray(responses)) { // Check if the responses are an array
+        return responses[Math.floor(Math.random() * responses.length)]; // Return a random response
     }
-    return responses;
+    return responses; // If not an array, return the response as-is
 }
 
-// Function to get ELIZA's response based on user input
+// Function to generate Eliza's response based on user input.
 function getElizaResponse(input) {
+    // Iterate over all defined response rules
     for (let rule of elizaResponses) {
+        // Check if the input matches the current rule's pattern
         const { match, response } = matchPattern(input, rule);
+
+        // If the input matches the pattern, generate a response
         if (match) {
+            // Detect the sentiment of the user input (positive, negative, neutral)
             const sentiment = detectSentiment(input);
 
-            // Avoid sentiment prefix for greetings
+            // Special case: If the rule matches a greeting, skip adding a sentiment prefix
             if (rule.pattern.test(/hello|hi|greetings/i)) {
-                return response;
+                return response; // Directly return the greeting response
             }
 
-            // Add sentiment-based prefix if relevant
+            // If the sentiment is not neutral, add a sentiment-based prefix to the response
             if (sentiment !== 'neutral') {
+                // Retrieve a sentiment-appropriate phrase (e.g., "That's great to hear!")
                 const sentimentPrefix = getRandomResponse(sentimentPhrases[sentiment]);
-                return `${sentimentPrefix} ${response}`;
+                return `${sentimentPrefix} ${response}`; // Combine the prefix with the response
             }
 
+            // Check if the user's name is stored in the context
             if (getContext('name')) {
-                const name = getContext('name');
+                const name = getContext('name'); // Retrieve the user's name from the context
+                // Insert the name into the response if applicable, and add a sentiment prefix
                 return `${getRandomResponse(sentimentPhrases[sentiment])} ${response.replace("$name", name)}`;
             }
 
-
+            // Return the matched response if no special handling is needed
             return response;
         }
     }
+
+    // Default response if no rules match the input
     return "I'm here to listen. Please, go on.";
 }
-
 
 // Apply normalization before matching
 function processInput() {
