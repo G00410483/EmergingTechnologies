@@ -238,14 +238,16 @@ let conversationState = {
     }
 };
 
+// Function to update the context with a key-value pair
 function updateContext(key, value) {
-    conversationState.context[key] = value;
+    conversationState.context[key] = value; // Adds or updates the key with the new value
 }
 
+
+// Function to retrieve a value from the context
 function getContext(key) {
-    return conversationState.context[key] || null;
+    return conversationState.context[key] || null; // Returns the value for the key, or null if it doesn't exist
 }
-
 // Function to match a pattern in the input
 function matchPattern(input, rule) {
     const match = input.match(rule.pattern);
