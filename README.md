@@ -1,6 +1,7 @@
 # 📚 Third-Order Letter Approximation & ELIZA Chatbot Project
 
-Welcome to the **Third-Order Letter Approximation & ELIZA Chatbot** project! This repository encompasses tasks ranging from text analysis using trigram models to building a classic ELIZA chatbot interface. Dive in to explore the functionalities and contributions of each component.
+**Third-Order Letter Approximation & ELIZA Chatbot** project! 
+This repository encompasses tasks ranging from text analysis using trigram models to building a classic ELIZA chatbot interface. 
 
 ---
 
@@ -25,7 +26,6 @@ Welcome to the **Third-Order Letter Approximation & ELIZA Chatbot** project! Thi
       - [8. Mobile-Friendly Design](#8-mobile-friendly-design)
   - [🎨 Design Features](#-design-features)
   - [🛠️ Technical Details](#️-technical-details)
-  - [✨ Future Enhancements](#-future-enhancements)
 
 
 ---
@@ -246,16 +246,6 @@ ELIZA's responsive layout adapts to different screen sizes, offering a seamless 
 - **Styling:** CSS (Glassmorphism, animations)
 - **Core Logic:** Regex pattern matching and dynamic response generation
 - **Sentiment Analysis:** Word-based scoring for emotional detection
-
----
-
-## ✨ **Future Enhancements**
-- **AI Integration:**  
-  Use advanced AI models for smarter, more adaptive responses.
-- **Multilingual Support:**  
-  Expand the chatbot's capabilities to handle multiple languages.
-- **Emotion-Based Avatars:**  
-  Add visuals or emojis to reflect detected sentiments.
 
 ---
 
