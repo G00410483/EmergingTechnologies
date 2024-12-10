@@ -60,22 +60,34 @@ const elizaResponses = [
         }
     },
     {
+        // Define a pattern to match "I am" followed by a single word
         pattern: /\bI am (\w+)\b/i,
         response: (match) => {
-            const stateOrName = match[1].toLowerCase();
-            const positiveStates = ['good', 'fine', 'okay', 'well'];
-            const emotions = ['happy', 'sad', 'angry', 'tired', 'excited'];
+            // Capture the word after "I am" and convert it to lowercase for consistency
+            const input = match[1].toLowerCase();
     
-            if (positiveStates.includes(stateOrName)) {
-                return `I'm glad to hear you're feeling ${stateOrName}. Is there anything you'd like to talk about?`;
-            } else if (emotions.includes(stateOrName)) {
-                return `It's okay to feel ${stateOrName}. Would you like to share more about it?`;
-            } else {
-                return `Nice to meet you, ${stateOrName}. How are you feeling today?`;
+            // Define lists of emotional states and positive responses
+            const positiveStates = ['good', 'fine', 'okay', 'well']; // Neutral/positive states
+            const emotions = ['happy', 'sad', 'angry', 'tired', 'excited', 'stressed']; // Emotional states
+            const commonStates = [...positiveStates, ...emotions]; // Combine all known states into one list
+    
+            // Check if the captured input matches any predefined emotional states
+            if (commonStates.includes(input)) {
+                // If the input matches a positive state, return a positive response
+                if (positiveStates.includes(input)) {
+                    return `I'm glad to hear you're feeling ${input}. Is there anything you'd like to talk about?`;
+                } 
+                // If the input matches an emotion, acknowledge it and ask for elaboration
+                else {
+                    return `It's okay to feel ${input}. Would you like to share more about it?`;
+                }
             }
+    
+            // If the input doesn't match any known states, assume it's a name and respond accordingly
+            return `Nice to meet you, ${input}. How has your day been so far?`;
         }
     },
-
+    
     {
         pattern: /\bhow are you\b/i,
         response: [
