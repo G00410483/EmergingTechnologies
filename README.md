@@ -121,87 +121,137 @@ Export the trigram model created in Task 1 to a JSON file. This enables future a
 
 ---
 
-## 🤖 ELIZA Chatbot
+# 🤖 ELIZA Chatbot
 
-### **Overview**
-A web-based **ELIZA chatbot** inspired by Joseph Weizenbaum's early natural language processing program from the 1960s. ELIZA simulates conversation by using predefined responses to keywords and patterns in user input. This project features a JavaScript-based chatbot interface that utilizes regular expressions to parse user input and respond conversationally.
+## **Overview**
+The **ELIZA Chatbot** is a web-based conversational program inspired by Joseph Weizenbaum's early natural language processing model. It simulates human-like conversation by analyzing user input and responding with dynamic, pre-programmed responses.
 
-### 🔧 Project Structure
-
-1. **`index.html`**
-   - Defines the chatbot's HTML structure.
-2. **`eliza.js`**
-   - Contains ELIZA's response logic, input processing, and chat management functions.
-3. **`style.css`**
-   - Styles the chatbot's UI, including animations and layout.
-
-### ✨ Features
-
-- **🧠 Natural Language Processing with Regular Expressions**
-  - Uses regex patterns to match user input and select appropriate responses.
-  
-- **👥 User-Friendly Interface**
-  - Visually appealing chat history with timestamps and seamless interaction flow.
-  
-- **🔄 Reset Management**
-  - Ability to reset the chat history for a fresh conversation.
-  
-- **📱 Responsive Design**
-  - Adaptive layout for optimal experience across various devices and screen sizes.
-
-### 🚀 Usage
-
-1. **Open the Chat Interface**
-   - Type a message in the input box at the bottom of the chat window and press Enter or click the send button to start chatting.
-   
-2. **Interact with ELIZA**
-   - ELIZA analyzes your input, matches it against known patterns, and responds accordingly.
-   
-3. **Reset Chat**
-   - Click the reset button in the header to clear the chat history and begin anew.
-
-### 📂 Code Overview
-
-#### **`eliza.js`**
-
-- **Response Patterns**
-  - `elizaResponses` array contains objects with `pattern` and `response` properties.
-  
-- **`getElizaResponse()` Function**
-  - Iterates through `elizaResponses` to find a pattern match for the user input and returns a formatted response.
-  
-- **`processInput()` Function**
-  - Manages user input, clears the input field, and displays ELIZA's response.
-  
-- **`addMessage()` Function**
-  - Adds messages to the chat window with timestamps and scrolls to the latest message.
-  
-- **`resetChat()` Function**
-  - Clears the chat history for a new conversation.
-
-#### **`style.css`**
-
-- **Chat Container**
-  - Center-aligned with a gradient background and glass effect.
-  
-- **Messages Styling**
-  - Distinct styles for user and bot messages, featuring speech bubble shapes, animations, and timestamps.
-  
-- **Input Area**
-  - Rounded input field with a custom send button for enhanced aesthetics.
-
-#### **`index.html`**
-
-- **Header**
-  - Displays the chatbot title and reset button.
-  
-- **Chat Box**
-  - Contains chat messages with `user` and `bot` classes for styling.
-  
-- **Input Field**
-  - Text input for user messages and a send button to trigger responses.
+This project includes:
+- A stylish, responsive interface.
+- Regex-based input parsing.
+- Context-aware responses for a more interactive experience.
 
 ---
 
-## 📁 File Structure
+## 🔧 **Project Structure**
+
+### **File Breakdown**
+1. **`index.html`**
+   - Defines the chatbot's structure and layout.
+2. **`eliza.js`**
+   - Contains the logic for input processing, response generation, and sentiment detection.
+3. **`style.css`**
+   - Provides the styling for the interface, animations, and overall design.
+
+### **Features**
+- **Dynamic Sentiment Analysis**
+- **Synonym Recognition**
+- **Interactive Conversations**
+- **Contextual Memory** (Tracks user name and emotional state)
+- **Mobile-Friendly Design**
+
+---
+
+## 🚀 **How to Use**
+1. **Start the Chatbot**  
+   Open `index.html` in any browser to launch the chatbot interface.
+
+2. **Type a Message**  
+   Interact by typing your message in the input box and pressing Enter or clicking the send button.
+
+3. **Reset the Chat**  
+   Clear the chat history using the Reset button in the header.
+
+---
+
+## 🛠️ **Feature Testing Guide**
+
+Here’s how you can test each feature of the chatbot:
+
+### 1. **Sentiment Detection**
+   - **Positive Sentiment:**  
+     Type: `I am happy`  
+     Expected Response: *"That's wonderful! What's contributing to your positive feelings?"*
+   - **Negative Sentiment:**  
+     Type: `I am sad`  
+     Expected Response: *"I'm sorry to hear that. Would you like to talk about what's making you feel this way?"*
+   - **Neutral Sentiment:**  
+     Type: `I am okay`  
+     Expected Response: *"I see. Is there anything you'd like to talk about?"*
+
+### 2. **Synonym Recognition**
+   - **Synonym for Greeting:**  
+     Type: `Hey`  
+     Expected Response: *"Hello! How are you feeling today?"*
+   - **Synonym for Sadness:**  
+     Type: `I feel blue`  
+     Expected Response: *"I'm sorry to hear that. Would you like to talk about what's making you feel this way?"*
+
+### 3. **Contextual Memory**
+   - **Provide Name:**  
+     Type: `My name is Alex`  
+     Expected Response: *"It's a pleasure to meet you, Alex. How has your day been so far?"*
+   - **Emotion Tracking:**  
+     After typing `I am excited`, type `Why do I feel like this?`  
+     Expected Response: *"Let's explore why you feel that way."*
+
+### 4. **Dynamic Response Patterns**
+   - **Ask for Time:**  
+     Type: `What time is it?`  
+     Expected Response: *"The current time is HH:MM AM/PM."*
+   - **Ask for Date:**  
+     Type: `What's today's date?`  
+     Expected Response: *"Today's date is MM/DD/YYYY."*
+
+### 5. **Conversation Flow**
+   - **Ask Open-ended Questions:**  
+     Type: `Why is the sky blue?`  
+     Expected Response: *"What are your thoughts on why the sky is blue?"*
+   - **Mention a Goal:**  
+     Type: `I want to learn coding`  
+     Expected Response: *"What steps do you think you can take toward achieving 'learn coding'?"*
+
+### 6. **Default Response**
+   - **Unrecognized Input:**  
+     Type: `asdjhasjdh`  
+     Expected Response: *"Please, tell me more about that."*
+
+### 7. **Reset Chat**
+   - **Clear the Conversation:**  
+     Click the Reset button in the header.  
+     Expected Behavior: The chat history should clear, and you can start a new conversation.
+
+---
+
+## ✨ **Design Features**
+- **Glassmorphism UI:**  
+  The interface uses a modern glass-like aesthetic for an immersive user experience.
+- **Responsive Layout:**  
+  Designed to adapt seamlessly across desktop and mobile devices.
+- **Typing Indicator:**  
+  A visual indicator displays when ELIZA is generating a response.
+
+---
+
+## 🛠️ **Technical Details**
+- **Programming Language:** JavaScript
+- **Styling:** CSS with animations and transitions
+- **Core Logic:** Regex pattern matching and dynamic function calls for response generation
+
+---
+
+## 📂 **Code Highlights**
+
+### Response Matching
+Regex-based matching identifies key patterns in user input to trigger appropriate responses:
+```javascript
+{
+    pattern: /\bhello\b|hi|hey|greetings/i,
+    response: [
+        "Hello! How are you feeling today?",
+        "Hi there! What's on your mind?",
+        "Hey! How can I assist you?"
+    ]
+}
+
 
