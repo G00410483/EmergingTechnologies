@@ -96,13 +96,19 @@ const elizaResponses = [
         pattern: /\bdo you understand\b/i,
         response: "I try my best to understand. Can you tell me more so I can help better?"
     },
-    
 
+    {
+        pattern: /I (?:want|would like|(?:'d like)) to (.+)/i,
+        response: (match) => {
+            const goal = match[1].trim();
+            return `What steps do you think you can take toward achieving "${goal}"?`;
+        }
+    },
+    
     { pattern: /I (?:am|feel) (sad|unhappy|depressed|down)/i, response: "I'm sorry to hear that. Would you like to talk about what's making you feel this way?" },
     { pattern: /I (?:am|feel) (happy|content|joyful|excited)/i, response: "That's wonderful! What's contributing to your positive feelings?" },
     { pattern: /I'm stressed|I feel stressed|stressful/i, response: "Stress can be overwhelming. What's contributing to your stress?" },
     { pattern: /I need (.*)/i, response: "What makes you feel you need $1?" },
-    { pattern: /I want to (.*)/i, response: "What steps do you think you can take toward $1?" },
     { pattern: /I (?:can't|cannot) (.*)/i, response: "It might be challenging, but what if you tried to $1?" },
     { pattern: /What is your name\?/i, response: "I'm Eliza, your virtual conversation partner. How can I assist you today?" },
     { pattern: /Why (.*)\?/i, response: "What are your thoughts on why $1?" },
