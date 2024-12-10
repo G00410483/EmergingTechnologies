@@ -4,7 +4,7 @@ Welcome to the **Third-Order Letter Approximation & ELIZA Chatbot** project! Thi
 
 ---
 
-## 📜 Table of Contents
+# 📜 Table of Contents
 
 - [📚 Third-Order Letter Approximation & ELIZA Chatbot Project](#-third-order-letter-approximation--eliza-chatbot-project)
   - [📋 Tasks Overview](#-tasks-overview)
@@ -14,13 +14,19 @@ Welcome to the **Third-Order Letter Approximation & ELIZA Chatbot** project! Thi
     - [💾 Task 4: Export Model as JSON File](#-task-4-export-model-as-json-file)
   - [🤖 ELIZA Chatbot](#-eliza-chatbot)
     - [🔧 Project Structure](#-project-structure)
-    - [✨ Features](#-features)
-    - [🚀 Usage](#-usage)
-    - [📂 Code Overview](#-code-overview)
-  - [📁 File Structure](#-file-structure)
-  - [🔗 License](#-license)
-  - [🙌 Contributing](#-contributing)
-  - [📞 Contact](#-contact)
+    - [✨ Features and Testing Guide](#-features-and-testing-guide)
+      - [1. Dynamic Sentiment Analysis](#1-dynamic-sentiment-analysis)
+      - [2. Synonym Recognition](#2-synonym-recognition)
+      - [3. Interactive Conversations](#3-interactive-conversations)
+      - [4. Contextual Memory](#4-contextual-memory)
+      - [5. Responsive Date and Time Information](#5-responsive-date-and-time-information)
+      - [6. Default Response for Unrecognized Input](#6-default-response-for-unrecognized-input)
+      - [7. Reset Chat](#7-reset-chat)
+      - [8. Mobile-Friendly Design](#8-mobile-friendly-design)
+  - [🎨 Design Features](#-design-features)
+  - [🛠️ Technical Details](#️-technical-details)
+  - [✨ Future Enhancements](#-future-enhancements)
+
 
 ---
 
@@ -124,12 +130,7 @@ Export the trigram model created in Task 1 to a JSON file. This enables future a
 # 🤖 ELIZA Chatbot
 
 ## **Overview**
-The **ELIZA Chatbot** is a web-based conversational program inspired by Joseph Weizenbaum's early natural language processing model. It simulates human-like conversation by analyzing user input and responding with dynamic, pre-programmed responses.
-
-This project includes:
-- A stylish, responsive interface.
-- Regex-based input parsing.
-- Context-aware responses for a more interactive experience.
+The **ELIZA Chatbot** is a web-based conversational program inspired by Joseph Weizenbaum's early natural language processing model. It simulates human-like conversations by analyzing user input and responding with dynamic, pre-programmed responses. Designed with a modern interface and interactive capabilities, ELIZA offers an engaging user experience.
 
 ---
 
@@ -137,121 +138,125 @@ This project includes:
 
 ### **File Breakdown**
 1. **`index.html`**
-   - Defines the chatbot's structure and layout.
+   - The main HTML file structuring the chatbot's interface and layout.
 2. **`eliza.js`**
-   - Contains the logic for input processing, response generation, and sentiment detection.
+   - The JavaScript file containing the chatbot's logic, response patterns, and sentiment detection.
 3. **`style.css`**
-   - Provides the styling for the interface, animations, and overall design.
-
-### **Features**
-- **Dynamic Sentiment Analysis**
-- **Synonym Recognition**
-- **Interactive Conversations**
-- **Contextual Memory** (Tracks user name and emotional state)
-- **Mobile-Friendly Design**
+   - Provides styling for the interface, animations, and overall design.
 
 ---
 
-## 🚀 **How to Use**
-1. **Start the Chatbot**  
-   Open `index.html` in any browser to launch the chatbot interface.
+## ✨ **Features and Testing Guide**
 
-2. **Type a Message**  
-   Interact by typing your message in the input box and pressing Enter or clicking the send button.
-
-3. **Reset the Chat**  
-   Clear the chat history using the Reset button in the header.
+### 1. **Dynamic Sentiment Analysis**
+ELIZA detects and categorizes the user's emotional state (positive, negative, or neutral) based on input, enhancing response relevance.
+- **Test Positive Sentiment:**  
+  Type: `I am excited`  
+  Expected Response: *"That's great to hear! What has you feeling excited?"*
+  
+- **Test Negative Sentiment:**  
+  Type: `I am feeling stressed`  
+  Expected Response: *"Stress can be overwhelming. What's contributing to your stress?"*
+  
+- **Test Neutral Sentiment:**  
+  Type: `I am fine`  
+  Expected Response: *"I see. Is there anything you'd like to talk about?"*
 
 ---
-
-## 🛠️ **Feature Testing Guide**
-
-Here’s how you can test each feature of the chatbot:
-
-### 1. **Sentiment Detection**
-   - **Positive Sentiment:**  
-     Type: `I am happy`  
-     Expected Response: *"That's wonderful! What's contributing to your positive feelings?"*
-   - **Negative Sentiment:**  
-     Type: `I am sad`  
-     Expected Response: *"I'm sorry to hear that. Would you like to talk about what's making you feel this way?"*
-   - **Neutral Sentiment:**  
-     Type: `I am okay`  
-     Expected Response: *"I see. Is there anything you'd like to talk about?"*
 
 ### 2. **Synonym Recognition**
-   - **Synonym for Greeting:**  
-     Type: `Hey`  
-     Expected Response: *"Hello! How are you feeling today?"*
-   - **Synonym for Sadness:**  
-     Type: `I feel blue`  
-     Expected Response: *"I'm sorry to hear that. Would you like to talk about what's making you feel this way?"*
+ELIZA can recognize synonyms of commonly used words or phrases, improving understanding and interaction quality.  
+- **Greeting Synonym:**  
+  Type: `Howdy`  
+  Expected Response: *"Hello! How are you feeling today?"*  
+- **Emotion Synonym:**  
+  Type: `I feel blue`  
+  Expected Response: *"I'm sorry to hear that. Would you like to talk about what's making you feel this way?"*
 
-### 3. **Contextual Memory**
-   - **Provide Name:**  
-     Type: `My name is Alex`  
-     Expected Response: *"It's a pleasure to meet you, Alex. How has your day been so far?"*
-   - **Emotion Tracking:**  
-     After typing `I am excited`, type `Why do I feel like this?`  
-     Expected Response: *"Let's explore why you feel that way."*
-
-### 4. **Dynamic Response Patterns**
-   - **Ask for Time:**  
-     Type: `What time is it?`  
-     Expected Response: *"The current time is HH:MM AM/PM."*
-   - **Ask for Date:**  
-     Type: `What's today's date?`  
-     Expected Response: *"Today's date is MM/DD/YYYY."*
-
-### 5. **Conversation Flow**
-   - **Ask Open-ended Questions:**  
-     Type: `Why is the sky blue?`  
-     Expected Response: *"What are your thoughts on why the sky is blue?"*
-   - **Mention a Goal:**  
-     Type: `I want to learn coding`  
-     Expected Response: *"What steps do you think you can take toward achieving 'learn coding'?"*
-
-### 6. **Default Response**
-   - **Unrecognized Input:**  
-     Type: `asdjhasjdh`  
-     Expected Response: *"Please, tell me more about that."*
-
-### 7. **Reset Chat**
-   - **Clear the Conversation:**  
-     Click the Reset button in the header.  
-     Expected Behavior: The chat history should clear, and you can start a new conversation.
+This is achieved using a robust synonym map that matches variations like "blue" to "sad" or "howdy" to "hello."
 
 ---
 
-## ✨ **Design Features**
+### 3. **Interactive Conversations**
+ELIZA creates meaningful exchanges by analyzing context and patterns in input.  
+- **Discuss a Goal:**  
+  Type: `I want to learn coding`  
+  Expected Response: *"What steps do you think you can take toward achieving 'learn coding'?"*  
+- **Ask a Question:**  
+  Type: `Why do people feel lonely?`  
+  Expected Response: *"What are your thoughts on why people feel lonely?"*
+
+---
+
+### 4. **Contextual Memory**
+ELIZA remembers user details, like names and emotions, to make conversations feel more personal.  
+- **Provide Name:**  
+  Type: `My name is Alex`  
+  Expected Response: *"It's a pleasure to meet you, Alex. How has your day been so far?"*  
+- **Emotion Tracking:**  
+  After typing `I am happy`, type `Why do I feel like this?`  
+  Expected Response: *"Let's explore why you feel that way."*
+
+---
+
+### 5. **Responsive Date and Time Information**
+ELIZA dynamically fetches and provides the current date or time when asked.  
+- **Ask for Time:**  
+  Type: `What time is it?`  
+  Expected Response: *"The current time is HH:MM AM/PM."*  
+- **Ask for Date:**  
+  Type: `What's today's date?`  
+  Expected Response: *"Today's date is MM/DD/YYYY."*
+
+---
+
+### 6. **Default Response for Unrecognized Input**
+When ELIZA doesn't understand the input, it encourages the user to elaborate.  
+- **Test Unrecognized Input:**  
+  Type: `asdfghjkl`  
+  Expected Response: *"Please, tell me more about that."*
+
+---
+
+### 7. **Reset Chat**
+Clear the conversation history to start fresh.
+- **Reset the Chat:**  
+  Click the Reset button in the header.  
+  Expected Behavior: The chat history should clear, leaving the interface ready for a new conversation.
+
+---
+
+### 8. **Mobile-Friendly Design**
+ELIZA's responsive layout adapts to different screen sizes, offering a seamless experience across devices.
+
+---
+
+## 🎨 **Design Features**
 - **Glassmorphism UI:**  
-  The interface uses a modern glass-like aesthetic for an immersive user experience.
-- **Responsive Layout:**  
-  Designed to adapt seamlessly across desktop and mobile devices.
+  A stylish, modern interface with translucent backgrounds and soft shadows.
 - **Typing Indicator:**  
-  A visual indicator displays when ELIZA is generating a response.
+  Simulates ELIZA typing to create a conversational feel.
+- **Smooth Animations:**  
+  Messages appear with fade-in effects, adding visual appeal.
 
 ---
 
 ## 🛠️ **Technical Details**
-- **Programming Language:** JavaScript
-- **Styling:** CSS with animations and transitions
-- **Core Logic:** Regex pattern matching and dynamic function calls for response generation
+- **Language:** JavaScript
+- **Styling:** CSS (Glassmorphism, animations)
+- **Core Logic:** Regex pattern matching and dynamic response generation
+- **Sentiment Analysis:** Word-based scoring for emotional detection
 
 ---
 
-## 📂 **Code Highlights**
+## ✨ **Future Enhancements**
+- **AI Integration:**  
+  Use advanced AI models for smarter, more adaptive responses.
+- **Multilingual Support:**  
+  Expand the chatbot's capabilities to handle multiple languages.
+- **Emotion-Based Avatars:**  
+  Add visuals or emojis to reflect detected sentiments.
 
-### Response Matching
-Regex-based matching identifies key patterns in user input to trigger appropriate responses:
-```javascript
-{
-    pattern: /\bhello\b|hi|hey|greetings/i,
-    response: [
-        "Hello! How are you feeling today?",
-        "Hi there! What's on your mind?",
-        "Hey! How can I assist you?"
-    ]
-}
+---
 
 
