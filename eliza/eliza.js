@@ -60,30 +60,36 @@ const elizaResponses = [
         }
     },
     {
-        // Define a pattern to match "I am" followed by a single word
+        // Match "I am" or "I'm" followed by one or more words
         pattern: /\bI am (\w+)\b/i,
         response: (match) => {
-            // Capture the word after "I am" and convert it to lowercase for consistency
+            // Capture the word after "I am" and convert it to lowercase
             const input = match[1].toLowerCase();
     
-            // Define lists of emotional states and positive responses
+            // Define lists of positive states and emotional states
             const positiveStates = ['good', 'fine', 'okay', 'well']; // Neutral/positive states
             const emotions = ['happy', 'sad', 'angry', 'tired', 'excited', 'stressed']; // Emotional states
-            const commonStates = [...positiveStates, ...emotions]; // Combine all known states into one list
+            const fillerWords = ['just', 'simply']; // Words that should not be treated as names or states
+            const commonStates = [...positiveStates, ...emotions]; // Combine all known states
     
-            // Check if the captured input matches any predefined emotional states
+            // Check if the input matches any filler words
+            if (fillerWords.includes(input)) {
+                return "I see. Could you tell me more about how you're feeling?";
+            }
+    
+            // Check if the input matches any known states (positive or emotional)
             if (commonStates.includes(input)) {
-                // If the input matches a positive state, return a positive response
+                // Respond to positive states
                 if (positiveStates.includes(input)) {
                     return `I'm glad to hear you're feeling ${input}. Is there anything you'd like to talk about?`;
-                } 
-                // If the input matches an emotion, acknowledge it and ask for elaboration
+                }
+                // Respond to emotional states
                 else {
                     return `It's okay to feel ${input}. Would you like to share more about it?`;
                 }
             }
     
-            // If the input doesn't match any known states, assume it's a name and respond accordingly
+            // If the input doesn't match any known states or filler words, treat it as a name
             return `Nice to meet you, ${input}. How has your day been so far?`;
         }
     },
