@@ -152,6 +152,16 @@ const synonyms = {
 
 };
 
+// Define the chatbot's conversation state to store user-specific details
+let conversationState = {
+    context: {
+        name: null, // Stores the user's name (default is null if not provided)
+        lastEmotion: null, // Tracks the last emotion mentioned by the user
+        sentimentHistory: [], // Keeps a history of detected sentiments (positive, negative, neutral)
+        previousTopics: [] // Stores previous topics discussed by the user
+    }
+};
+
 const sentiments = {
     positive: ['happy', 'joyful', 'excited'],
     negative: ['sad', 'angry', 'stressed'],
@@ -240,16 +250,6 @@ function normalizeInput(input) {
     // Replace synonyms with their canonical forms
     return input.replace(/\b\w+\b/g, (word) => synonymMap[word.toLowerCase()] || word);
 }
-
-// Define the chatbot's conversation state to store user-specific details
-let conversationState = {
-    context: {
-        name: null, // Stores the user's name (default is null if not provided)
-        lastEmotion: null, // Tracks the last emotion mentioned by the user
-        sentimentHistory: [], // Keeps a history of detected sentiments (positive, negative, neutral)
-        previousTopics: [] // Stores previous topics discussed by the user
-    }
-};
 
 // Function to update the context with a key-value pair
 function updateContext(key, value) {
