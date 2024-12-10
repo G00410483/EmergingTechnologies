@@ -257,17 +257,37 @@ function getContext(key) {
 
 // Function to match user input against a specific rule
 function matchPattern(input, rule) {
-    const match = input.match(rule.pattern); // Tests the input against the pattern in the rule
-    if (match) { // If there's a match
+    // Test the input string against the pattern defined in the rule
+    const match = input.match(rule.pattern);
+
+    // If there is a match
+    if (match) {
+        // Check if the response in the rule is a function
         if (typeof rule.response === 'function') {
-            // If the response is a function, call it with the match details
+            // Call the function with the match details and return the response
             return { match: true, response: rule.response(match) };
         }
-        // Otherwise, return a random response from the response array
-        return { match: true, response: getRandomResponse(rule.response) };
+
+        // If the response is not a function, get a random response from the response array
+        let response = getRandomResponse(rule.response);
+
+        // If the regex pattern captures groups (match.length > 1)
+        if (match.length > 1) {
+            // Replace placeholders like $1, $2, etc., with the corresponding captured groups
+            for (let i = 1; i < match.length; i++) {
+                // Replace $i in the response with the captured group at index i
+                response = response.replace(`$${i}`, match[i]);
+            }
+        }
+
+        // Return the response after replacements
+        return { match: true, response };
     }
-    return { match: false }; // If no match, return false
+
+    // If no match is found, return false
+    return { match: false };
 }
+
 
 // Function to select a random response from an array
 function getRandomResponse(responses) {
