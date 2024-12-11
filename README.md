@@ -134,6 +134,8 @@ The **ELIZA Chatbot** is a web-based conversational program inspired by Joseph W
 
 ---
 
+[![pages-build-deployment](https://github.com/dvlsc000/EmergingTechnologies/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/dvlsc000/EmergingTechnologies/actions/workflows/pages/pages-build-deployment)
+
 ## 🔧 **Project Structure**
 
 ### **File Breakdown**
