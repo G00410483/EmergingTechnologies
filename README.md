@@ -133,7 +133,7 @@ Export the trigram model created in Task 1 to a JSON file. This enables future a
 The **ELIZA Chatbot** is a web-based conversational program inspired by Joseph Weizenbaum's early natural language processing model. It simulates human-like conversations by analyzing user input and responding with dynamic, pre-programmed responses. Designed with a modern interface and interactive capabilities, ELIZA offers an engaging user experience.
 
 ---
-
+## GitHub Pages Link:
 [![pages-build-deployment](https://github.com/dvlsc000/EmergingTechnologies/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/dvlsc000/EmergingTechnologies/actions/workflows/pages/pages-build-deployment)
 
 ## 🔧 **Project Structure**
