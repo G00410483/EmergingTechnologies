@@ -249,4 +249,4 @@ ELIZA's responsive layout adapts to different screen sizes, offering a seamless 
 
 ---
 
-
+[![pages-build-deployment](https://github.com/dvlsc000/EmergingTechnologies/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/dvlsc000/EmergingTechnologies/actions/workflows/pages/pages-build-deployment)
