@@ -13,7 +13,7 @@ This repository encompasses tasks ranging from text analysis using trigram model
     - [✍️ Task 2: Third-Order Letter Approximation Generation](#️-task-2-third-order-letter-approximation-generation)
     - [📈 Task 3: Analyze Your Model](#-task-3-analyze-your-model)
     - [💾 Task 4: Export Model as JSON File](#-task-4-export-model-as-json-file)
-    - [💾 Export Model as JSON File](#-program-flow-diagram)  
+    - [📈 Program Flow Diagram](#-program-flow-diagram)  
   - [🤖 ELIZA Chatbot](#-eliza-chatbot)
     - [🔧 Project Structure](#-project-structure)
     - [✨ Features and Testing Guide](#-features-and-testing-guide)
