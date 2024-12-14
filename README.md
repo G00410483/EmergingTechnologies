@@ -146,7 +146,7 @@ flowchart TD
 
 ## 🤖 ELIZA Chatbot
 
-## **Overview**
+### **Overview**
 
 ![Built with JavaScript](https://img.shields.io/badge/Built_with-JavaScript-4CAF50)
 ![ELIZA Chatbot](https://img.shields.io/badge/Feature-ELIZA_Chatbot-purple)
@@ -155,7 +155,7 @@ flowchart TD
 The **ELIZA Chatbot** is a web-based conversational program inspired by Joseph Weizenbaum's early natural language processing model. It simulates human-like conversations by analyzing user input and responding with dynamic, pre-programmed responses. Designed with a modern interface and interactive capabilities, ELIZA offers an engaging user experience.
 
 ---
-## GitHub Pages Link:
+### GitHub Pages Link:
 [![pages-build-deployment](https://github.com/dvlsc000/EmergingTechnologies/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/dvlsc000/EmergingTechnologies/actions/workflows/pages/pages-build-deployment)
 
 ## 🔧 **Project Structure**
@@ -170,7 +170,7 @@ The **ELIZA Chatbot** is a web-based conversational program inspired by Joseph W
 
 ---
 
-## ✨ **Features and Testing Guide**
+### ✨ **Features and Testing Guide**
 
 ### 1. **Dynamic Sentiment Analysis**
 ELIZA detects and categorizes the user's emotional state (positive, negative, or neutral) based on input, enhancing response relevance.
@@ -255,7 +255,7 @@ ELIZA's responsive layout adapts to different screen sizes, offering a seamless 
 
 ---
 
-## 🚀 Chatbot Workflow Diagram
+### 🚀 Chatbot Workflow Diagram
 
 ```mermaid
 flowchart TD
@@ -277,7 +277,7 @@ flowchart TD
     N --> O[Wait for Next Input]
 ```
 
-## 🎨 **Design Features**
+### 🎨 **Design Features**
 - **Glassmorphism UI:**  
   A stylish, modern interface with translucent backgrounds and soft shadows.
 - **Typing Indicator:**  
@@ -287,7 +287,7 @@ flowchart TD
 
 ---
 
-## 🛠️ **Technical Details**
+### 🛠️ **Technical Details**
 - **Language:** JavaScript
 - **Styling:** CSS (Glassmorphism, animations)
 - **Core Logic:** Regex pattern matching and dynamic response generation
