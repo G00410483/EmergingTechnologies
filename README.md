@@ -25,6 +25,7 @@ This repository encompasses tasks ranging from text analysis using trigram model
       - [6. Default Response for Unrecognized Input](#6-default-response-for-unrecognized-input)
       - [7. Reset Chat](#7-reset-chat)
       - [8. Mobile-Friendly Design](#8-mobile-friendly-design)
+  - [🚀 Chatbot Workflow Diagram](#-chatbot-workflow-diagram)
   - [🎨 Design Features](#-design-features)
   - [🛠️ Technical Details](#️-technical-details)
 
@@ -128,7 +129,7 @@ Export the trigram model created in Task 1 to a JSON file. This enables future a
 
 ---
 
-## 📈 Program Flow Diagram
+### 📈 Program Flow Diagram
 
 ```mermaid
 flowchart TD
@@ -247,6 +248,28 @@ Clear the conversation history to start fresh.
 ELIZA's responsive layout adapts to different screen sizes, offering a seamless experience across devices.
 
 ---
+
+## 🚀 Chatbot Workflow Diagram
+
+```mermaid
+flowchart TD
+    A[User Input] --> B[Normalize Input]
+    B --> C{Match Pattern?}
+    C -- Yes --> D[Execute Response Logic]
+    D --> E{Response Type?}
+    E -- Static --> F[Generate Predefined Response]
+    E -- Function --> G[Execute Response Function]
+    F --> H[Apply Sentiment Analysis]
+    G --> H
+    H --> I{Context Update?}
+    I -- Yes --> J[Update Context State]
+    I -- No --> K[Skip Context Update]
+    J --> L[Generate Final Response]
+    K --> L
+    L --> M[Simulate Typing Indicator]
+    M --> N[Display Response to User]
+    N --> O[Wait for Next Input]
+```
 
 ## 🎨 **Design Features**
 - **Glassmorphism UI:**  
