@@ -5,6 +5,12 @@ This repository encompasses tasks ranging from text analysis using trigram model
 
 ---
 
+![Built with JavaScript](https://img.shields.io/badge/Built_with-JavaScript-4CAF50)
+![Trigram Analysis](https://img.shields.io/badge/Feature-Trigram_Analysis-blue)
+![ELIZA Chatbot](https://img.shields.io/badge/Feature-ELIZA_Chatbot-purple)
+
+---
+
 # 📜 Table of Contents
 
 - [📚 Third-Order Letter Approximation & ELIZA Chatbot Project](#-third-order-letter-approximation--eliza-chatbot-project)
