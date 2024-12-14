@@ -127,6 +127,20 @@ Export the trigram model created in Task 1 to a JSON file. This enables future a
 
 ---
 
+## Program Flow Diagram
+
+```mermaid
+flowchart TD
+    A[Start] --> B[📂 Load and Clean Text]
+    B --> C[📊 Generate Trigrams]
+    C --> D[📜 Display Top Trigrams]
+    C --> E[✍️ Generate Text with Trigrams]
+    E --> F[🔍 Analyze Generated Text]
+    F --> G[📈 Calculate Percentage of Real Words]
+    G --> H[📤 Export Trigram Model to JSON]
+    H --> I[🏁 End]
+```
+
 ## 🤖 ELIZA Chatbot
 
 ## **Overview**
