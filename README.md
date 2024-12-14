@@ -289,7 +289,7 @@ flowchart TD
 
 ---
 
-🚀 **Live Demo:** [Try ELIZA Chatbot Now](https://dvlsc000.github.io/EmergingTechnologies/eliza)
+🚀 **Live Demo:** [Try ELIZA Chatbot Now](https://dvlsc000.github.io/EmergingTechnologies)
 
 
 
