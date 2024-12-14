@@ -185,10 +185,10 @@ ELIZA detects and categorizes the user's emotional state (positive, negative, or
 ### 2. **Synonym Recognition**
 ELIZA can recognize synonyms of commonly used words or phrases, improving understanding and interaction quality.  
 - **Greeting Synonym:**  
-  Type: `Howdy`  
+  Type: `Hey`  
   Expected Response: *"Hello! How are you feeling today?"*  
 - **Emotion Synonym:**  
-  Type: `I feel blue`  
+  Type: `I feel stressed`  
   Expected Response: *"I'm sorry to hear that. Would you like to talk about what's making you feel this way?"*
 
 This is achieved using a robust synonym map that matches variations like "blue" to "sad" or "howdy" to "hello."
