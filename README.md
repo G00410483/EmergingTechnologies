@@ -5,12 +5,6 @@ This repository encompasses tasks ranging from text analysis using trigram model
 
 ---
 
-![Built with JavaScript](https://img.shields.io/badge/Built_with-JavaScript-4CAF50)
-![Trigram Analysis](https://img.shields.io/badge/Feature-Trigram_Analysis-blue)
-![ELIZA Chatbot](https://img.shields.io/badge/Feature-ELIZA_Chatbot-purple)
-
----
-
 # 📜 Table of Contents
 
 - [📚 Third-Order Letter Approximation & ELIZA Chatbot Project](#-third-order-letter-approximation--eliza-chatbot-project)
@@ -34,11 +28,12 @@ This repository encompasses tasks ranging from text analysis using trigram model
   - [🚀 Chatbot Workflow Diagram](#-chatbot-workflow-diagram)
   - [🎨 Design Features](#-design-features)
   - [🛠️ Technical Details](#️-technical-details)
-
-
 ---
 
 ## 📋 Tasks Overview
+
+![Built with Python](https://img.shields.io/badge/Built_with-Python-4CAF50)
+![Trigram Analysis](https://img.shields.io/badge/Feature-Trigram_Analysis-blue)
 
 ### 🔍 Task 1: Third-Order Letter Approximation Model
 
@@ -152,6 +147,11 @@ flowchart TD
 ## 🤖 ELIZA Chatbot
 
 ## **Overview**
+
+![Built with JavaScript](https://img.shields.io/badge/Built_with-JavaScript-4CAF50)
+![ELIZA Chatbot](https://img.shields.io/badge/Feature-ELIZA_Chatbot-purple)
+
+
 The **ELIZA Chatbot** is a web-based conversational program inspired by Joseph Weizenbaum's early natural language processing model. It simulates human-like conversations by analyzing user input and responding with dynamic, pre-programmed responses. Designed with a modern interface and interactive capabilities, ELIZA offers an engaging user experience.
 
 ---
