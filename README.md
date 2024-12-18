@@ -28,6 +28,7 @@ This repository encompasses tasks ranging from text analysis using trigram model
   - [🚀 Chatbot Workflow Diagram](#-chatbot-workflow-diagram)
   - [🎨 Design Features](#-design-features)
   - [🛠️ Technical Details](#️-technical-details)
+  - [📚 References](#-references-)
 ---
 
 ## 📋 Tasks Overview
