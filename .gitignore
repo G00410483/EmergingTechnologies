@@ -35,3 +35,5 @@ Thumbs.db
 venv/
 __pycache__/
 *.pyc
+
+top_trigrams_test.txt
