@@ -303,7 +303,7 @@ flowchart TD
 
 The following references were utilized in the development of this project. They include links to resources, tutorials, and documentation that informed the code implementation and design:
 
-## Task 1: Third-Order Letter Approximation Model
+Task 1: Third-Order Letter Approximation Model
 
 1. **N-grams and Trigram Extraction**  
    - [Understanding N-grams in Python](https://stackoverflow.com/questions/17531684/n-grams-in-python-four-five-six-grams)  
@@ -311,7 +311,7 @@ The following references were utilized in the development of this project. They 
 2. **Data Cleaning Techniques**  
    - [Removing Non-ASCII Characters in Python](https://stackoverflow.com/questions/20078816/replace-non-ascii-characters-with-a-single-space)  
 
-## Task 2: Trigram-Based Text Generation
+Task 2: Trigram-Based Text Generation
 
 3. **Random Selection with Weights**  
    - [Python `random.choices()` Usage](https://docs.python.org/3/library/random.html#random.choices)  
@@ -319,7 +319,7 @@ The following references were utilized in the development of this project. They 
 4. **Understanding Text Generation**  
    - [Building Markov Models for Text](https://towardsdatascience.com/how-to-build-a-markov-chain-text-generator-c3b1fed7fad7)  
 
-## Task 3: Model Analysis
+Task 3: Model Analysis
 
 5. **Text Cleaning and Tokenization**  
    - [Splitting Strings into Words](https://www.geeksforgeeks.org/python-split-multiple-characters-from-string/)  
@@ -327,12 +327,12 @@ The following references were utilized in the development of this project. They 
 6. **Valid Word Check**  
    - [Checking Words Against Dictionary](https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-variable-name-in-python)  
 
-## Task 4: Exporting Trigram Model
+Task 4: Exporting Trigram Model
 
 7. **JSON Handling in Python**  
    - [Using `json.dump` for Data Export](https://www.geeksforgeeks.org/json-dump-in-python/)  
 
-## ELIZA Chatbot Development
+ELIZA Chatbot Development
 
 8. **Regex and String Matching**  
    - [Regex Syntax and Match Patterns](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp)  
@@ -343,7 +343,7 @@ The following references were utilized in the development of this project. They 
 10. **Chatbot Design and User Interaction**  
     - [Building Conversational Interfaces](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage)  
 
-## Web Application UI/UX
+Web Application UI/UX
 
 11. **Responsive Design with Flexbox**  
     - [Flexbox Guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)  
