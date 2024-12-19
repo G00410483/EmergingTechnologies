@@ -458,6 +458,7 @@ function addMessage(content, sender) {
     chatBox.scrollTop = chatBox.scrollHeight;
 }
 
+
 // Event listener for Enter key
 document.getElementById('user-input').addEventListener('keypress', (e) => {
     // Process the input if the Enter key is pressed
